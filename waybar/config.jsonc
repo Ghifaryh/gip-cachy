@@ -1,0 +1,73 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 32, // Sleeker height
+    // Remove margin-left and margin-right for edge-to-edge
+    "margin-top": 0,
+    "margin-left": 0,
+    "margin-right": 0,
+    "margin-bottom": 0,
+    "spacing": 4,
+    
+    "modules-left": ["hyprland/workspaces"],
+    "modules-center": ["clock"],
+    "modules-right": ["bluetooth", "memory", "battery", "tray", "custom/power"],
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 50,
+        "rewrite": {
+            "(.*) — Mozilla Firefox": "󰈹 $1",
+            "(.*) - Visual Studio Code": "󰨞 $1",
+            "(.*) - fish": "  Terminal"
+        },
+        "separate-outputs": true
+    },
+
+    "hyprland/workspaces": {
+        "format": "{name}",
+        "on-click": "activate"
+    },
+    "battery": {
+    	"states": {
+        	"health": 80, // Add this state
+        	"warning": 30,
+        	"critical": 15
+    	},
+    	"format": "{icon} {capacity}%",
+    	"format-charging": "󱐋 {capacity}%",
+    	"format-plugged": " {capacity}%",
+    	"format-health": "󰥔 {capacity}%", // Custom icon for 80% limit
+    	"format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+    // "battery": {
+    //     "states": { "warning": 30, "critical": 15 },
+    //     "format": "{icon} {capacity}%",
+    //     "format-icons": ["", "", "", "", ""]
+    // },
+    "clock": {
+        "format": "{:%H:%M | %a %d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "custom/power": {
+         "format": "⏻",
+         "on-click": "wlogout",
+         "tooltip": false
+    },
+    "network": {
+         "format-wifi": " {essid}",
+         "format-ethernet": "󰈀",
+         "format-disconnected": "⚠ Disconnected",
+	 "on-click":"networkmanager_dmenu"
+         // "on-click": "nm-connection-editor" // Opens the GUI when clicked
+    },
+    "bluetooth": {
+	"format": " {status}",
+	"format-disabled": "󰂲",
+	"on-click": "blueman-manager"
+     },
+     "tray": {
+    	"icon-size": 18,
+    	"spacing": 10
+     },
+}
