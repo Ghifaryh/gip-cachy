@@ -162,9 +162,11 @@ powerstats() {
 
 # --- Hyprland / System Aliases ---
 alias rb='killall waybar; waybar > /dev/null 2>&1 & disown'
+
 alias perf='powerprofilesctl set performance && powerprofilesctl get'
 alias balanced='powerprofilesctl set balanced && powerprofilesctl get'
 alias low='powerprofilesctl set power-saver && powerprofilesctl get'
+
 alias update='paru -Syu && paru -Sc'
 alias pssnvpn='sudo openfortivpn -c /etc/openfortivpn/pssn.conf'
 
@@ -183,7 +185,8 @@ export ANTHROPIC_API_KEY="local-key"
 
 # AI Aliases
 alias qwen='ollama run qwen2.5:3b'
-alias local-claude='ollama launch claude --model qwen2.5:3b'
+# alias local-claude='ollama launch claude --model qwen2.5:3b'
+alias local-claude='ollama launch claude --model qwen-claude'
 alias ai-chill='~/.config/hypr/scripts/gpu-chill.sh'
 alias ai-start='sudo systemctl start ollama && local-claude'
 

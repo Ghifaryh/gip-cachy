@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-    background: rgba(15, 15, 15, 0.9); 
+    background: rgba(15, 15, 15, 0.8); 
     /* Slightly more solid for edge-to-edge */
     color: #ffffff;
     /* Round only the bottom corners for a "connected" look */
