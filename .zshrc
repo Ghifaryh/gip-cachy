@@ -117,8 +117,9 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 #
 # --- Battery Aliases ---
-alias bat80='echo 80 | sudo tee /sys/class/power_supply/BAT0/charge_control_end_threshold && echo "🔋 Limit set to 80%"'
-alias bat100='echo 100 | sudo tee /sys/class/power_supply/BAT0/charge_control_end_threshold && echo "⚡ Limit set to 100%"'
+# alias bat80='echo 80 | sudo tee /sys/class/power_supply/BAT0/charge_control_end_threshold && echo "🔋 Limit set to 80%"'
+# alias bat100='echo 100 | sudo tee /sys/class/power_supply/BAT0/charge_control_end_threshold && echo "⚡ Limit set to 100%"'
+alias batvac='asusctl battery oneshot && echo "Limit is set to 100% for temporary"'
 
 # --- Battery Health Function ---
 bathealth() {

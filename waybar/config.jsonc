@@ -58,16 +58,22 @@
          "format-wifi": " {essid}",
          "format-ethernet": "󰈀",
          "format-disconnected": "⚠ Disconnected",
-	 "on-click":"networkmanager_dmenu"
-         // "on-click": "nm-connection-editor" // Opens the GUI when clicked
+	       "on-click":"networkmanager_dmenu"
+            // "on-click": "nm-connection-editor" // Opens the GUI when clicked
     },
     "bluetooth": {
-	"format": " {status}",
-	"format-disabled": "󰂲",
-	"on-click": "blueman-manager"
-     },
+	    "format": " {status}",
+	    "format-disabled": "󰂲",
+	    "on-click": "blueman-manager"
+    },
      "tray": {
     	"icon-size": 18,
     	"spacing": 10
      },
+     "custom/asus_profile": {
+        "exec": "asusctl profile -g | grep 'Active profile' | cut -d' ' -f3",
+        "interval": 10,
+        "on-click": "asusctl profile -n",
+        "format": "󰈐 {}"
+    },
 }
