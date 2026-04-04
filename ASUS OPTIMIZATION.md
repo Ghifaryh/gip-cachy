@@ -24,13 +24,7 @@ To maximize battery, the dGPU (RTX 3050) is toggled based on use case.
 - **Office/Dev:** `supergfxctl -m Integrated` (Saves ~14W).
 - **External Monitor/Heavy Work:** `supergfxctl -m Hybrid`.
 - **User Action:** Requires Logout to apply mode changes.
-
-## 📝 Storage & Sync (Obsidian)
-**Method:** Rclone Systemd Service (`~/.config/systemd/user/rclone-gdrive.service`)
-- **Remote:** `gdrive:` mounted to `~/Gdrive`.
-- **VFS Cache Mode:** `full` (Required for Obsidian SQLite/Workspace writes).
-- **Write Back:** 5s (Prevents constant API calls while typing).
-
+- 
 ---
 
 ## 🌙 Sleep & Idle (Hyprland)
