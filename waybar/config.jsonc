@@ -9,9 +9,9 @@
     "margin-bottom": 0,
     "spacing": 4,
     
-    "modules-left": ["hyprland/workspaces"],
+    "modules-left": ["custom/logo", "hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["bluetooth", "memory", "battery", "tray", "custom/power"],
+    "modules-right": ["bluetooth", "memory", "tray","battery"],
 
     "hyprland/window": {
         "format": "{title}",
@@ -75,5 +75,10 @@
         "interval": 10,
         "on-click": "asusctl profile -n",
         "format": "󰈐 {}"
+    },
+    "custom/logo": {
+      "format": "", // Use  if you prefer the Nix icon
+      "tooltip": false,
+      "on-click": "wlogout" // This makes the logo open your app launcher!
     },
 }

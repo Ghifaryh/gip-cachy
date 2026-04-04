@@ -1,95 +1,103 @@
+/* --- Global Reset --- */
 * {
     border: none;
-    border-radius: 0; /* Reset all rounding */
-    font-family: "JetBrainsMono Nerd Font", Roboto, Helvetica, Arial, sans-serif;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
     font-size: 13px;
     min-height: 0;
     background-color: transparent;
 }
 
+/* --- Main Bar --- */
 window#waybar {
-    background: rgba(15, 15, 15, 0.8); 
-    /* Slightly more solid for edge-to-edge */
-    color: #ffffff;
-    /* Round only the bottom corners for a "connected" look */
-    /* border-bottom-left-radius: 8px;  */
-    /* border-bottom-right-radius: 8px; */
+    background: rgba(0, 0, 0, 0); /* Keep the main bar invisible */
+    border-radius: 12px;
+    margin: 0;
+    min-height: 0;
+    font-weight: bold;
+    /* This ensures the bar has a consistent thickness */
     transition-property: background-color;
     transition-duration: .5s;
 }
 
-tooltip {
-  background: rgba(30, 30, 46, 0.95); /* A deep dark blue/grey */
-  border: 1px solid #cba6f7;          /* A subtle purple border */
-  border-radius: 8px;
-  color: #cdd6f4;                     /* Light text color */
+/* --- The "Pill" Style (Dark Frosted Glass) --- */
+#workspaces, 
+#battery, 
+#clock, 
+#custom-logo,
+#cpu, #memory, #network, #tray, #custom-power, #bluetooth {
+    /* Deep dark blue-grey at 70% opacity for better OLED protection */
+    background: rgba(30, 30, 46, 0.7); 
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0px 8px;
+    color: #cdd6f4;    /* Light text for dark background */
 }
 
-tooltip label {
-  padding: 5px;
-  font-family: "JetBrainsMono Nerd Font";
+/* --- Fix: Centered Logo --- */
+#custom-logo {
+    font-size: 18px;
+    color: #1793d1;
+    /* Removing the specific margins that were shifting it off-center */
+    padding-right: 16px; 
+    padding-left: 10px;
 }
 
-/* This targets the actual menu/popup container */
-menu {
-  background: #1e1e2e; /* Deep dark background */
-  border: 1px solid #cba6f7;
-  border-radius: 10px;
-  padding: 5px;
-  color: #cdd6f4;
-}
-
-/* This ensures the individual items in the menu have a background */
-menu item {
-  background: transparent;
-  padding: 5px 10px;
-  border-radius: 5px;
-}
-
-/* Add a hover effect so you know what you're clicking */
-menu item:hover {
-  background: #313244; /* Slightly lighter grey/blue */
-  color: #f5c2e7;      /* Pinkish text on hover */
-}
-
-.modules-left,
-.modules-center,
-.modules-right {
-  /* background-color: rgba(15, 15, 15, 0.9);  */
-  background-color: rgba(0, 0, 0, 0); 
-  /* border-radius: 8px; */
-  /* padding: 4px 8px; */
+/* --- Fix: Larger/Cleaner Workspaces --- */
+#workspaces {
+    padding: 0px 5px; /* Adds space inside the 'pill' */
 }
 
 #workspaces button {
-    padding: 0 10px;
-    color: #999999;
-    background: transparent;
+    padding: 0 8px;
+    color: #6c7086; /* Dimmed for inactive */
 }
 
 #workspaces button.active {
     color: #ffffff;
     background: rgba(255, 255, 255, 0.1);
-    border-bottom: 3px solid #ffffff;
-    border-radius: 10px;
+    border-bottom: 2px solid #1793d1;
+    /* This adds a subtle "OLED Glow" to your active workspace */
+    text-shadow: 0 0 5px rgba(23, 147, 209, 0.6); 
+    border-radius: 8px;
 }
 
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #89b4fa;
+}
 
+/* --- Right-side logic --- */
+/* We already styled these in the 'Pill' section above, 
+   so we just need specific colors/logic here */
+#battery.health { color: #89b4fa; }
+#battery.charging { color: #a6e3a1; }
 
-#window {
+#battery.critical:not(.charging) {
+    color: #f38ba8; /* Red for low battery */
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#clock {
     font-weight: bold;
-    margin-left: 10px;
+    color: #cdd6f4;
 }
 
-/* Add some padding to the right-side modules so they don't hit the screen edge */
-#cpu, #memory, #network, #battery, #tray, #custom-power {
-    padding: 0 10px;
+@keyframes blink {
+    to {
+        background-color: #f38ba8;
+        color: #11111b;
+    }
 }
 
-#battery.health {
-    color: #89b4fa; /* Blue for health-conscious charging */
-}
-
-#battery.charging {
-    color: #a6e3a1; /* Green for charging */
+/* Tooltips & Menus (Your existing dark theme) */
+tooltip {
+  background: rgba(30, 30, 46, 0.95);
+  border: 1px solid #cba6f7;
+  border-radius: 8px;
+  color: #cdd6f4;
 }
