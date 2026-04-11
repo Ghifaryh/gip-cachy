@@ -1,0 +1,5 @@
+#!/bin/bash
+rfkill unblock bluetooth
+# --class tells Hyprland "this is a special window"
+# -e tells kitty to execute the command
+exec kitty --class="bluetui-float" -e bluetui

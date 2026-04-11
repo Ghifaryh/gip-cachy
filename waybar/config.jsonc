@@ -4,8 +4,8 @@
     "height": 32, // Sleeker height
     // Remove margin-left and margin-right for edge-to-edge
     "margin-top": 0,
-    "margin-left": 0,
-    "margin-right": 0,
+    "margin-left": 3,
+    "margin-right": 3,
     "margin-bottom": 0,
     "spacing": 4,
     
