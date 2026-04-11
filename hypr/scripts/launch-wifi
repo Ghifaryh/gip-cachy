@@ -1,3 +1,39 @@
 #!/bin/bash
-rfkill unblock wifi
-exec kitty --class="impala-float" -e impala
+CLASS="impala-float"
+
+# 1. Start TUI
+kitty --class="$CLASS" -e impala &
+
+# 2. Wait for it to exist
+while [ -z "$(hyprctl clients -j | jq -r ".[] | select(.class == \"$CLASS\")")" ]; do
+  sleep 0.1
+done
+
+# 3. Focus and Warp
+addr=$(hyprctl clients -j | jq -r ".[] | select(.class == \"$CLASS\") | .address")
+hyprctl dispatch focuswindow address:$addr
+hyprctl dispatch cursorwarp 0 0
+
+# 4. Boundary Check Loop
+while true; do
+  # Get window geometry
+  win_data=$(hyprctl clients -j | jq -r ".[] | select(.address == \"$addr\")")
+  if [ -z "$win_data" ]; then break; fi # Exit if window closed manually
+
+  x=$(echo "$win_data" | jq '.at[0]')
+  y=$(echo "$win_data" | jq '.at[1]')
+  w=$(echo "$win_data" | jq '.size[0]')
+  h=$(echo "$win_data" | jq '.size[1]')
+
+  # Get cursor position
+  cursor=$(hyprctl cursorpos)
+  cx=$(echo "$cursor" | cut -d',' -f1)
+  cy=$(echo "$cursor" | cut -d',' -f2)
+
+  # Check if cursor is outside
+  if ((cx < x || cx > x + w || cy < y || cy > y + h)); then
+    pkill -f "kitty --class=$CLASS"
+    break
+  fi
+  sleep 0.2
+done

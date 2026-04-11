@@ -11,7 +11,7 @@
     
     "modules-left": ["custom/logo", "hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["bluetooth", "memory", "tray","battery"],
+    "modules-right": ["network" ,"bluetooth", "memory", "tray","battery"],
 
     "hyprland/window": {
         "format": "{title}",
@@ -55,18 +55,27 @@
          "tooltip": false
     },
     "network": {
-         "format-wifi": " {essid}",
-         "format-ethernet": "󰈀",
-         "format-disconnected": "⚠ Disconnected",
-	       "on-click":"networkmanager_dmenu"
-            // "on-click": "nm-connection-editor" // Opens the GUI when clicked
+      "interface": "wlan0", // Check your interface with `ip link`
+      "format-wifi": "  {signalStrength}%",
+      "format-ethernet": "󰈀 {ipaddr}",
+      "format-disconnected": "󰖪",
+      "tooltip-format": "Connected to {essid}",
+      "on-click": "~/.config/hypr/scripts/launch-wifi",
+      "max-length": 50
     },
     "bluetooth": {
-	    "format": " {status}",
-	    "format-disabled": "󰂲",
-	    "on-click": "blueman-manager"
+     "format": " {status}",
+     "format-disabled": "󰂲 Off",
+     "format-connected": " {device_alias}",
+     "tooltip-format": "{controller_alias}\t{controller_address}",
+     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+     // Left Click: Launch the TUI pop-up
+     "on-click": "~/.config/hypr/scripts/launch-bluetooth",
+     // Middle Click: Hardware Toggle (On/Off)
+     "on-click-right": "rfkill toggle bluetooth",
     },
-     "tray": {
+    "tray": {
     	"icon-size": 18,
     	"spacing": 10
      },
