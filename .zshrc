@@ -194,3 +194,4 @@ alias ai-start='sudo systemctl start ollama && local-claude'
 # tmux aliases
 alias ta='tmux attach -t'
 alias tl='tmux ls'
+alias lg='lazygit'

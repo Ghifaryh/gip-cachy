@@ -1,11 +1,11 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 32, // Sleeker height
+    "height": 24, // Sleeker height
     // Remove margin-left and margin-right for edge-to-edge
     "margin-top": 0,
-    "margin-left": 3,
-    "margin-right": 3,
+    "margin-left": 4,
+    "margin-right": 4,
     "margin-bottom": 0,
     "spacing": 4,
     
