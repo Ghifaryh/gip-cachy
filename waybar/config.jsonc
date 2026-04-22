@@ -56,7 +56,7 @@
     },
     "network": {
       "interface": "wlan0", // Check your interface with `ip link`
-      "format-wifi": "  {signalStrength}%",
+      "format-wifi": " ",
       "format-ethernet": "󰈀 {ipaddr}",
       "format-disconnected": "󰖪",
       "tooltip-format": "Connected to {essid}",
@@ -76,7 +76,7 @@
      "on-click-right": "rfkill toggle bluetooth",
     },
     "tray": {
-    	"icon-size": 18,
+    	"icon-size": 14,
     	"spacing": 10
      },
      "custom/asus_profile": {
