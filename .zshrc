@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 [[ -f /usr/share/cachyos-zsh-config/cachyos-zsh-config.zsh ]] && source /usr/share/cachyos-zsh-config/cachyos-zsh-config.zsh
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -119,6 +120,8 @@ source $ZSH/oh-my-zsh.sh
 # --- Battery Aliases ---
 # alias bat80='echo 80 | sudo tee /sys/class/power_supply/BAT0/charge_control_end_threshold && echo "🔋 Limit set to 80%"'
 # alias bat100='echo 100 | sudo tee /sys/class/power_supply/BAT0/charge_control_end_threshold && echo "⚡ Limit set to 100%"'
+
+alias bat80='asusctl battery limit 80 && echo "Limit is set to 80% brother"'
 alias batvac='asusctl battery oneshot && echo "Limit is set to 100% for temporary"'
 
 # --- Battery Health Function ---
@@ -175,10 +178,7 @@ alias pssnvpn='sudo openfortivpn -c /etc/openfortivpn/pssn.conf'
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+eval "$(fnm env --use-on-cd)"
 
 export ANTHROPIC_BASE_URL="http://localhost:11434"
 export ANTHROPIC_AUTH_TOKEN="ollama"
@@ -195,3 +195,5 @@ alias ai-start='sudo systemctl start ollama && local-claude'
 alias ta='tmux attach -t'
 alias tl='tmux ls'
 alias lg='lazygit'
+
+# zprof
