@@ -195,5 +195,20 @@ alias ai-start='sudo systemctl start ollama && local-claude'
 alias ta='tmux attach -t'
 alias tl='tmux ls'
 alias lg='lazygit'
+alias shared='cd /mnt/shared/'
 
 # zprof
+
+# bun completions
+[ -s "/home/gip/.bun/_bun" ] && source "/home/gip/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# go
+export GOPATH=$HOME/go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+# opencode
+export PATH=/home/gip/.opencode/bin:$PATH

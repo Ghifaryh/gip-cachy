@@ -5,7 +5,8 @@
     font-family: "JetBrainsMono Nerd Font", sans-serif;
     font-size: 12.5px;
     min-height: 0;
-    background-color: transparent;
+    /* background-color: transparent; */
+    /* background: rgba(30, 30, 46, 1.0); */
 }
 
 /* --- Main Bar --- */

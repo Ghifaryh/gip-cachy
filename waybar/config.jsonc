@@ -45,9 +45,18 @@
     //     "format": "{icon} {capacity}%",
     //     "format-icons": ["", "", "", "", ""]
     // },
+    // "clock": {
+    //     "format": "{:%H:%M | %a %d}",
+    //     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    // },
     "clock": {
-        "format": "{:%H:%M | %a %d}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+      "format": "{:%H:%M | %a %d}",
+      "tooltip-format": "<tt><span size='12pt'>{calendar}</span></tt>",
+      "calendar": {
+        "format": {
+            "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+        }
+      }
     },
     "custom/power": {
          "format": "⏻",
