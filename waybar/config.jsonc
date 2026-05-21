@@ -99,4 +99,15 @@
       "tooltip": false,
       "on-click": "wlogout" // This makes the logo open your app launcher!
     },
+    "custom/tailscale": {
+      "format": "{}",
+      "return-type": "json",
+      "interval": 10,
+      "exec": "~/.config/hypr/scripts/tailscale.sh",
+      "on-click": "kdesu /usr/bin/tailscale up",
+      "on-click-right": "kdesu /usr/bin/tailscale down",
+      // "on-click": "pkexec tailscale up",
+      // "on-click-right": "pkexec tailscale down",
+      "tooltip": true
+    },
 }

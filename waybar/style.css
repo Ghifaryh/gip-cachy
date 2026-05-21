@@ -95,6 +95,26 @@ window#waybar {
     }
 }
 
+#custom-tailscale {
+    background: rgba(30, 30, 46, 0.7); /* Match your other pills */
+    color: #6c7086; /* Default grey */
+    padding-right: 12px; 
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* When the script returns the 'connected' class */
+#custom-tailscale.connected {
+    color: #89b4fa; /* Tailscale Blue */
+    border: 1px solid rgba(137, 180, 250, 0.3);
+}
+
+/* Optional: Pulse animation when disconnected? Maybe too much for a minimal rice. */
+#custom-tailscale.disconnected {
+    color: #f38ba8; /* Red-ish if you want to know it's off */
+}
+
 /* Tooltips & Menus (Your existing dark theme) */
 tooltip {
   background: rgba(30, 30, 46, 0.95);
