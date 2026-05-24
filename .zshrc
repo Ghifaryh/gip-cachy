@@ -150,19 +150,28 @@ bathealth() {
 # --- Power Stats ---
 powerstats() {
     echo "--- CPU Governor ---"
-    cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
+    cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor 2>/dev/null || echo "N/A"
+    
     echo "--- GPU Power State ---"
-    nvidia-smi -q -d PERFORMANCE | grep "Performance State" || echo "GPU Sleeping or Error"
+    nvidia-smi -q -d PERFORMANCE 2>/dev/null | grep "Performance State" || echo "GPU Sleeping, Missing, or Error"
+    
     echo "--- Battery Discharge ---"
-    local microwatts=$(grep "POWER_SUPPLY_POWER_NOW" /sys/class/power_supply/BAT0/uevent | cut -d= -f2)
-    if [ -n "$microwatts" ]; then
-        # bc is great for floating point math in Zsh
-        local watts=$(echo "scale=2; $microwatts / 1000000" | bc)
-        echo "$watts Watts"
+    if [ -f /sys/class/power_supply/BAT0/uevent ]; then
+        local microwatts=$(grep "POWER_SUPPLY_POWER_NOW" /sys/class/power_supply/BAT0/uevent | cut -d= -f2)
+        if [ -n "$microwatts" ]; then
+            # bc handles the floating point math perfectly
+            local watts=$(echo "scale=2; $microwatts / 1000000" | bc)
+            echo "$watts Watts"
+        else
+            echo "Charging / AC Power"
+        fi
     else
-        echo "Charging / AC Power"
+        echo "Battery BAT0 not found"
     fi
 }
+
+alias pwstats='powerstats'
+alias enrate='upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep energy-rate'
 
 # --- Hyprland / System Aliases ---
 alias rb='killall waybar; waybar > /dev/null 2>&1 & disown'
@@ -197,7 +206,13 @@ alias tl='tmux ls'
 alias lg='lazygit'
 alias shared='cd /mnt/shared/'
 
-# zprof
+# ssh aliases
+alias stb="kitty +kitten ssh root@100.84.225.86"
+
+# tailscale
+alias ts='tailscale status'
+alias tsup='sudo systemctl start tailscaled && sudo tailscale up'
+alias tsdown='sudo tailscale down'
 
 # bun completions
 [ -s "/home/gip/.bun/_bun" ] && source "/home/gip/.bun/_bun"
