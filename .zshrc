@@ -212,7 +212,7 @@ alias stb="kitty +kitten ssh root@100.84.225.86"
 # tailscale
 alias ts='tailscale status'
 alias tsup='sudo systemctl start tailscaled && sudo tailscale up'
-alias tsdown='sudo tailscale down'
+alias tsdown='sudo tailscale down && sudo systemctl stop tailscaled'
 
 # bun completions
 [ -s "/home/gip/.bun/_bun" ] && source "/home/gip/.bun/_bun"
