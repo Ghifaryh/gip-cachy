@@ -227,3 +227,12 @@ export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 
 # opencode
 export PATH=/home/gip/.opencode/bin:$PATH
+
+# env stuff
+# Dynamically source all modular configurations
+if [ -d "$HOME/.zsh" ]; then
+    for config_file in "$HOME/.zsh"/*.zsh; do
+        [ -r "$config_file" ] && source "$config_file"
+    done
+    unset config_file
+fi
