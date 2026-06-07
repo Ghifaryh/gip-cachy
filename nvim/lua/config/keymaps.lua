@@ -3,6 +3,7 @@
 -- Add any additional keymaps here
 
 -- Smartly close the current file tab without breaking Neo-tree splits or window layouts
+-- Smartly close the current file tab and return to the dashboard safely
 vim.keymap.set("n", "<S-q>", function()
   if Snacks and Snacks.bufdelete then
     -- 1. Grab a list of all currently active open code buffers
@@ -10,10 +11,16 @@ vim.keymap.set("n", "<S-q>", function()
       return vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].buflisted
     end, vim.api.nvim_list_bufs())
 
-    -- 2. If this is the absolute last open file tab, close it and force the Dashboard open
+    -- 2. If this is the absolute last open file tab, swap to dashboard FIRST, then wipe the buffer
     if #valid_buffers <= 1 then
-      Snacks.bufdelete()
+      local current_buf = vim.api.nvim_get_current_buf()
       Snacks.dashboard.open()
+      -- Smoothly delete the old file buffer after the dashboard takes over the screen
+      vim.schedule(function()
+        if vim.api.nvim_buf_is_valid(current_buf) then
+          Snacks.bufdelete(current_buf)
+        end
+      end)
     else
       -- 3. Otherwise, just cycle down to the next open file tab normally
       Snacks.bufdelete()

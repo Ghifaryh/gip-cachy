@@ -3,15 +3,22 @@ return {
   opts = {
     filesystem = {
       filtered_items = {
-        visible = true, -- Ensure hidden things are visible when toggled
-        hide_gitignored = true, -- Never hide files just because they are in .gitignore
-        hide_dotfiles = false, -- Show standard dotfiles by default
-        hide_by_name = {
-          -- If .env is explicitly blocked here by LazyVim, this clears it out
-        },
-        never_show = {
-          -- This empties out the strict global blocklist so nothing stays permanently invisible
-        },
+        visible = true,
+        hide_gitignored = false,
+        hide_dotfiles = false,
+        hide_by_name = {},
+        never_show = {},
+      },
+      -- ADD THIS BLOCK TO FORCE LIVE UPDATES:
+      use_libuv_file_watcher = true, -- Uses system-level events to watch for file changes instantly
+    },
+    -- Configure the event managers to refresh Git statuses automatically
+    event_handlers = {
+      {
+        event = "git_status_changed",
+        handler = function()
+          require("neo-tree.sources.manager").refresh("filesystem")
+        end,
       },
     },
   },

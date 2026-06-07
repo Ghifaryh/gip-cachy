@@ -11,14 +11,20 @@
 
 /* --- Main Bar --- */
 window#waybar {
-    background: rgba(0, 0, 0, 0); /* Keep the main bar invisible */
-    border-radius: 12px;
-    margin: 0;
-    min-height: 0;
-    font-weight: bold;
-    /* This ensures the bar has a consistent thickness */
-    transition-property: background-color;
-    transition-duration: .5s;
+    background: transparent;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: rgba(30, 30, 46, 0.65); /* Catppuccin Mocha Base with 65% transparency */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle glass edge */
+    
+    /* Fully round the corners for that "Dynamic Island" pill shape */
+    border-radius: 100px; 
+    
+    padding: 2px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Soft dropdown drop-shadow */
 }
 
 /* --- The "Pill" Style (Dark Frosted Glass) --- */
@@ -51,16 +57,14 @@ window#waybar {
 
 #workspaces button {
     padding: 0 8px;
-    color: #6c7086; /* Dimmed for inactive */
+    color: #cdd6f4;
 }
 
+/* Make your active workspace standout inside the pill */
 #workspaces button.active {
-    color: #ffffff;
+    color: #33ccff;
     background: rgba(255, 255, 255, 0.1);
-    border-bottom: 2px solid #1793d1;
-    /* This adds a subtle "OLED Glow" to your active workspace */
-    text-shadow: 0 0 5px rgba(23, 147, 209, 0.6); 
-    border-radius: 8px;
+    border-radius: 100px;
 }
 
 #workspaces button:hover {
