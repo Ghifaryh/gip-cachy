@@ -1,53 +1,70 @@
-/* Import your existing catppuccin colors to stay consistent */
 @import "~/.config/rofi/colors/catppuccin.rasi"
+
+* {
+    background-color: transparent;
+    text-color: #cdd6f4; /* Pure Catppuccin Text Color */
+}
 
 configuration {
     font: "JetBrainsMono Nerd Font 12";
-    show-icons: true;
+    show-icons: false;
 }
 
 window {
     width: 450px;
     height: 400px;
-    /* Use the Frosted Obsidian color from our Waybar setup */
-    background-color: rgba(30, 30, 46, 0.8);
+    background-color: rgba(30, 30, 46, 0.95);
     border: 1px;
     border-color: rgba(255, 255, 255, 0.1);
     border-radius: 12px;
 }
 
 mainbox {
-    background-color: transparent;
     children: [ "inputbar", "listview" ];
 }
 
 inputbar {
-    background-color: transparent;
     padding: 15px;
     children: [ "prompt", "entry" ];
 }
 
+prompt {
+    text-color: #f38ba8; /* Red Accent */
+    padding: 0px 8px 0px 0px;
+}
+
 entry {
     placeholder: "Search Emojis...";
-    placeholder-color: @fg;
+    placeholder-color: rgba(205, 214, 244, 0.4);
+    text-color: #cdd6f4;
 }
 
 listview {
-    background-color: transparent;
     columns: 1;
     lines: 8;
     spacing: 5px;
     padding: 10px;
+    fixed-height: true;
 }
 
 element {
-    background-color: transparent;
     padding: 8px;
     border-radius: 8px;
 }
 
+/* Normal unselected list items */
+element-text {
+    background-color: transparent;
+    text-color: #cdd6f4;
+}
+
+/* Selected list item container */
 element selected {
-    /* Uses the color defined in your catppuccin.rasi */
-    background-color: @selected;
-    text-color: @background;
+    background-color: #f38ba8; /* Red highlight background */
+}
+
+/* Text inside selected item */
+element selected element-text {
+    background-color: transparent;
+    text-color: #11111b; /* High-contrast dark text on selected red highlight */
 }
