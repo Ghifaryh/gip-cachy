@@ -1,85 +1,91 @@
-/* --- Global Reset --- */
+/* --- Global Reset & Typography --- */
 * {
     border: none;
     border-radius: 0;
-    font-family: "JetBrainsMono Nerd Font", sans-serif;
-    font-size: 12.5px;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
     min-height: 0;
-    /* background-color: transparent; */
-    /* background: rgba(30, 30, 46, 1.0); */
 }
 
-/* --- Main Bar --- */
+/* --- Main Bar Window --- */
 window#waybar {
     background: transparent;
 }
 
+/* --- Container Islands (Single Background Layer) --- */
 .modules-left,
 .modules-center,
 .modules-right {
-    background: rgba(30, 30, 46, 0.65); /* Catppuccin Mocha Base with 65% transparency */
-    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle glass edge */
-    
-    /* Fully round the corners for that "Dynamic Island" pill shape */
-    border-radius: 100px; 
-    
-    padding: 2px 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Soft dropdown drop-shadow */
+    background: rgba(24, 24, 37, 0.75); /* Dark Catppuccin Mocha base */
+    border: 1px solid rgba(255, 255, 255, 0.12); /* Crisp, subtle glass outline */
+    border-radius: 10px;
+    padding: 0px 10px;
+    margin-top: 0px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-/* --- The "Pill" Style (Dark Frosted Glass) --- */
+/* --- Inner Modules (Transparent - Eliminates Double Background) --- */
 #workspaces, 
 #battery, 
 #clock, 
 #custom-logo,
-#cpu, #memory, #network, #tray, #custom-power, #bluetooth {
-    /* Deep dark blue-grey at 70% opacity for better OLED protection */
-    background: rgba(30, 30, 46, 0.7); 
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 10px;
-    padding: 0px 6px;
-    color: #cdd6f4;    /* Light text for dark background */
-}
-
-/* --- Fix: Centered Logo --- */
-#custom-logo {
-    font-size: 18px;
-    color: #1793d1;
-    /* Removing the specific margins that were shifting it off-center */
-    padding-right: 16px; 
-    padding-left: 10px;
-}
-
-/* --- Fix: Larger/Cleaner Workspaces --- */
-#workspaces {
-    padding: 0px 5px; /* Adds space inside the 'pill' */
-}
-
-#workspaces button {
-    padding: 0 8px;
+#cpu, 
+#memory, 
+#network, 
+#tray, 
+#bluetooth,
+#custom-tailscale {
+    background: transparent; /* Stripped double background */
+    border: none;
+    padding: 0 6px;
     color: #cdd6f4;
 }
 
-/* Make your active workspace standout inside the pill */
+/* --- Logo Styling --- */
+#custom-logo {
+    font-size: 15px;
+    color: #89b4fa; /* Accent blue */
+    padding-right: 8px;
+    padding-left: 4px;
+}
+
+/* --- Workspaces --- */
+#workspaces button {
+    padding: 0 6px;
+    color: #6c7086; /* Dim inactive workspaces */
+    transition: all 0.2s ease-in-out;
+}
+
 #workspaces button.active {
-    color: #33ccff;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 100px;
+    color: #89b4fa; /* Soft Catppuccin Blue */
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
 }
 
 #workspaces button:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: #89b4fa;
+    color: #f5e0dc;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 8px;
 }
 
-/* --- Right-side logic --- */
-/* We already styled these in the 'Pill' section above, 
-   so we just need specific colors/logic here */
-#battery.health { color: #89b4fa; }
-#battery.charging { color: #a6e3a1; }
+/* --- Center Clock --- */
+#clock {
+    font-weight: bold;
+    color: #cdd6f4;
+    padding: 0 4px;
+}
 
+/* --- Right Side Modules & Accents --- */
+#network { color: #89b4fa; }
+#bluetooth { color: #b4befe; }
+#memory { color: #cba6f7; }
+
+#battery { color: #a6e3a1; }
+#battery.charging { color: #a6e3a1; }
+#battery.warning { color: #fab387; }
 #battery.critical:not(.charging) {
-    color: #f38ba8; /* Red for low battery */
+    color: #f38ba8;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -87,42 +93,23 @@ window#waybar {
     animation-direction: alternate;
 }
 
-#clock {
-    font-weight: bold;
-    color: #cdd6f4;
-}
-
 @keyframes blink {
     to {
-        background-color: #f38ba8;
         color: #11111b;
+        background-color: #f38ba8;
+        border-radius: 4px;
     }
 }
 
-#custom-tailscale {
-    background: rgba(30, 30, 46, 0.7); /* Match your other pills */
-    color: #6c7086; /* Default grey */
-    padding-right: 12px; 
-    padding-left: 10px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+/* --- System Tray --- */
+#tray {
+    padding: 0 6px;
 }
 
-/* When the script returns the 'connected' class */
-#custom-tailscale.connected {
-    color: #89b4fa; /* Tailscale Blue */
-    border: 1px solid rgba(137, 180, 250, 0.3);
-}
-
-/* Optional: Pulse animation when disconnected? Maybe too much for a minimal rice. */
-#custom-tailscale.disconnected {
-    color: #f38ba8; /* Red-ish if you want to know it's off */
-}
-
-/* Tooltips & Menus (Your existing dark theme) */
+/* --- Tooltips --- */
 tooltip {
-  background: rgba(30, 30, 46, 0.95);
-  border: 1px solid #cba6f7;
-  border-radius: 8px;
-  color: #cdd6f4;
+    background: rgba(30, 30, 46, 0.95);
+    border: 1px solid rgba(203, 166, 247, 0.4);
+    border-radius: 8px;
+    color: #cdd6f4;
 }

@@ -1,0 +1,128 @@
+/* --- Global Reset --- */
+* {
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrainsMono Nerd Font", sans-serif;
+    font-size: 12.5px;
+    min-height: 0;
+    /* background-color: transparent; */
+    /* background: rgba(30, 30, 46, 1.0); */
+}
+
+/* --- Main Bar --- */
+window#waybar {
+    background: transparent;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+    background: rgba(30, 30, 46, 0.65); /* Catppuccin Mocha Base with 65% transparency */
+    border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle glass edge */
+    
+    /* Fully round the corners for that "Dynamic Island" pill shape */
+    border-radius: 100px; 
+    
+    padding: 2px 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Soft dropdown drop-shadow */
+}
+
+/* --- The "Pill" Style (Dark Frosted Glass) --- */
+#workspaces, 
+#battery, 
+#clock, 
+#custom-logo,
+#cpu, #memory, #network, #tray, #custom-power, #bluetooth {
+    /* Deep dark blue-grey at 70% opacity for better OLED protection */
+    background: rgba(30, 30, 46, 0.7); 
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    padding: 0px 6px;
+    color: #cdd6f4;    /* Light text for dark background */
+}
+
+/* --- Fix: Centered Logo --- */
+#custom-logo {
+    font-size: 18px;
+    color: #1793d1;
+    /* Removing the specific margins that were shifting it off-center */
+    padding-right: 16px; 
+    padding-left: 10px;
+}
+
+/* --- Fix: Larger/Cleaner Workspaces --- */
+#workspaces {
+    padding: 0px 5px; /* Adds space inside the 'pill' */
+}
+
+#workspaces button {
+    padding: 0 8px;
+    color: #cdd6f4;
+}
+
+/* Make your active workspace standout inside the pill */
+#workspaces button.active {
+    color: #33ccff;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: #89b4fa;
+}
+
+/* --- Right-side logic --- */
+/* We already styled these in the 'Pill' section above, 
+   so we just need specific colors/logic here */
+#battery.health { color: #89b4fa; }
+#battery.charging { color: #a6e3a1; }
+
+#battery.critical:not(.charging) {
+    color: #f38ba8; /* Red for low battery */
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#clock {
+    font-weight: bold;
+    color: #cdd6f4;
+}
+
+@keyframes blink {
+    to {
+        background-color: #f38ba8;
+        color: #11111b;
+    }
+}
+
+#custom-tailscale {
+    background: rgba(30, 30, 46, 0.7); /* Match your other pills */
+    color: #6c7086; /* Default grey */
+    padding-right: 12px; 
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* When the script returns the 'connected' class */
+#custom-tailscale.connected {
+    color: #89b4fa; /* Tailscale Blue */
+    border: 1px solid rgba(137, 180, 250, 0.3);
+}
+
+/* Optional: Pulse animation when disconnected? Maybe too much for a minimal rice. */
+#custom-tailscale.disconnected {
+    color: #f38ba8; /* Red-ish if you want to know it's off */
+}
+
+/* Tooltips & Menus (Your existing dark theme) */
+tooltip {
+  background: rgba(30, 30, 46, 0.95);
+  border: 1px solid #cba6f7;
+  border-radius: 8px;
+  color: #cdd6f4;
+}

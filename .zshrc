@@ -236,3 +236,4 @@ if [ -d "$HOME/.zsh" ]; then
     done
     unset config_file
 fi
+export GTK_MODULES=$GTK_MODULES:appmenu-gtk-module
