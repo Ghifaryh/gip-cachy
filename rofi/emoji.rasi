@@ -1,0 +1,53 @@
+/* Import your existing catppuccin colors to stay consistent */
+@import "~/.config/rofi/colors/catppuccin.rasi"
+
+configuration {
+    font: "JetBrainsMono Nerd Font 12";
+    show-icons: true;
+}
+
+window {
+    width: 450px;
+    height: 400px;
+    /* Use the Frosted Obsidian color from our Waybar setup */
+    background-color: rgba(30, 30, 46, 0.8);
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+}
+
+mainbox {
+    background-color: transparent;
+    children: [ "inputbar", "listview" ];
+}
+
+inputbar {
+    background-color: transparent;
+    padding: 15px;
+    children: [ "prompt", "entry" ];
+}
+
+entry {
+    placeholder: "Search Emojis...";
+    placeholder-color: @fg;
+}
+
+listview {
+    background-color: transparent;
+    columns: 1;
+    lines: 8;
+    spacing: 5px;
+    padding: 10px;
+}
+
+element {
+    background-color: transparent;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+element selected {
+    /* Uses the color defined in your catppuccin.rasi */
+    background-color: @selected;
+    text-color: @background;
+}

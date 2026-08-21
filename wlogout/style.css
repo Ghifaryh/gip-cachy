@@ -1,0 +1,58 @@
+* {
+    background-image: none;
+    box-shadow: none;
+    font-family: "JetBrains Mono", sans-serif;
+    font-size: 16px;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Semi-transparent dark background over desktop */
+window {
+    background-color: rgba(24, 24, 37, 0.85);
+}
+
+/* Floating Card Base Styles */
+button {
+    border-radius: 16px;
+    border: 2px solid #313244;
+    color: #cdd6f4;
+    background-color: #1e1e2e;
+    background-repeat: no-repeat;
+    background-position: center 35%;
+    background-size: 28%;
+    margin: 12px;
+    padding-top: 80px; /* Pushes text label cleanly below icon */
+}
+
+/* Hover, Active, and Focus Animations */
+button:focus, button:active, button:hover {
+    background-color: #313244;
+    border-color: #f38ba8; /* Sazabi / Catppuccin Red border glow */
+    color: #f38ba8;
+    outline-style: none;
+}
+
+/* Button Icon Mappings */
+#lock {
+    background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
+}
+
+#logout {
+    background-image: image(url("/usr/share/wlogout/icons/logout.png"), url("/usr/local/share/wlogout/icons/logout.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
+}
+
+#shutdown {
+    background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
+}
+
+#reboot {
+    background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
