@@ -22,7 +22,8 @@
     "bluetooth",
     "memory",
     "tray",
-    "battery"
+    "battery",
+    "custom/notification",
   ],
 
   "custom/logo": {
@@ -142,5 +143,26 @@
     "format": "⏻",
     "on-click": "wlogout",
     "tooltip": false
+  },
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂚",
+      "dnd-notification": "󰂛",
+      "dnd-none": "󰂛",
+      "inhibited-notification": "󱅫",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰂛"
+    },
+    "return-type": "json",
+    "exec": "swaync-client -s | stdbuf -oL jq --unbuffered --compact-output '{text: .count, alt: (if .dnd then \"dnd-\" else \"\" end + if .inhibited then \"inhibited-\" else \"\" end + if .count > 0 then \"notification\" else \"none\" end), tooltip: \"Notifications\", class: [(if .count > 0 then \"has-notifications\" else \"none\" end)]}'",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
   }
+
 }

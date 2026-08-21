@@ -35,7 +35,8 @@ window#waybar {
 #network, 
 #tray, 
 #bluetooth,
-#custom-tailscale {
+#custom-tailscale,
+#custom-notification {
     background: transparent; /* Stripped double background */
     border: none;
     padding: 0 6px;
@@ -48,6 +49,11 @@ window#waybar {
     color: #89b4fa; /* Accent blue */
     padding-right: 8px;
     padding-left: 4px;
+}
+
+#custom-notification {
+    font-size: 14px;
+    color: #f38ba8; /* Catppuccin Red accent for notification bell */
 }
 
 /* --- Workspaces --- */
