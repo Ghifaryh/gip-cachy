@@ -1,113 +1,146 @@
 {
-    "layer": "top",
-    "position": "top",
-    "height": 24, // Sleeker height
-    // Remove margin-left and margin-right for edge-to-edge
-    "margin-top": 0,
-    "margin-left": 4,
-    "margin-right": 4,
-    "margin-bottom": 0,
-    "spacing": 4,
-    
-    "modules-left": ["custom/logo", "hyprland/workspaces"],
-    "modules-center": ["clock"],
-    "modules-right": ["network" ,"bluetooth", "memory", "tray","battery"],
+  "layer": "top",
+  "position": "top",
+  "height": 24,
+  "margin-top": 0,
+  "margin-left": 4,
+  "margin-right": 4,
+  "margin-bottom": 0,
+  "spacing": 4,
 
-    "hyprland/window": {
-        "format": "{title}",
-        "max-length": 50,
-        "rewrite": {
-            "(.*) — Mozilla Firefox": "󰈹 $1",
-            "(.*) - Visual Studio Code": "󰨞 $1",
-            "(.*) - fish": "  Terminal"
-        },
-        "separate-outputs": true
-    },
+  "modules-left": [
+    "custom/logo",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    // "custom/tailscale",
+    // "custom/asus_profile",
+    "network",
+    "bluetooth",
+    "memory",
+    "tray",
+    "battery"
+  ],
 
-    "hyprland/workspaces": {
-        "format": "{name}",
-        "on-click": "activate"
+  "custom/logo": {
+    "format": "",
+    "tooltip": false,
+    "on-click": "wlogout"
+  },
+
+  "hyprland/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "all-outputs": true
+  },
+
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 50,
+    "rewrite": {
+      "(.*) — Mozilla Firefox": "󰈹 $1",
+      "(.*) - Visual Studio Code": "󰨞 $1",
+      "(.*) - fish": " Terminal"
     },
-    "battery": {
-    	"states": {
-        	"health": 80, // Add this state
-        	"warning": 30,
-        	"critical": 15
-    	},
-    	"format": "{icon} {capacity}%",
-    	"format-charging": "󱐋 {capacity}%",
-    	"format-plugged": " {capacity}%",
-    	"format-health": "󰥔 {capacity}%", // Custom icon for 80% limit
-    	"format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-    },
-    // "battery": {
-    //     "states": { "warning": 30, "critical": 15 },
-    //     "format": "{icon} {capacity}%",
-    //     "format-icons": ["", "", "", "", ""]
-    // },
-    // "clock": {
-    //     "format": "{:%H:%M | %a %d}",
-    //     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    // },
-    "clock": {
-      "format": "{:%H:%M | %a %d}",
-      "tooltip-format": "<tt><span size='12pt'>{calendar}</span></tt>",
-      "calendar": {
-        "format": {
-            "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
-        }
+    "separate-outputs": true
+  },
+
+  "clock": {
+    "format": "{:%H:%M | %A %d}",
+    "tooltip-format": "<tt><span size='11pt'>{calendar}</span></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#cdd6f4'><b>{}</b></span>",
+        "days": "<span color='#a6adc8'><b>{}</b></span>",
+        "weeks": "<span color='#94e2d5'><b>W{}</b></span>",
+        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
       }
     },
-    "custom/power": {
-         "format": "⏻",
-         "on-click": "wlogout",
-         "tooltip": false
+    "actions": {
+      "on-click-right": "mode",
+      "on-scroll-up": "shift_up",
+      "on-scroll-down": "shift_down"
+    }
+  },
+
+  "network": {
+    // Dynamic detection: automatic fallbacks between Wi-Fi and Ethernet
+    "format-wifi": "  {essid}",
+    "format-ethernet": "󰈀 {ipaddr}",
+    "format-disconnected": "󰖪 Disconnected",
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "Signal: {signalStrength}% ({signaldBm} dBm)\nFrequency: {frequency}MHz\nSSID: {essid}",
+    "tooltip-format-ethernet": "Interface: {ifname}\nIP: {ipaddr}/{cidr}",
+    "tooltip-format-disconnected": "Disconnected",
+    "on-click": "~/.config/hypr/scripts/launch-wifi",
+    "max-length": 30
+  },
+
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": "󰂲 Off",
+    "format-connected": " {device_alias}",
+    "tooltip-format": "{controller_alias}\t{controller_address}",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
+    "on-click": "~/.config/hypr/scripts/launch-bluetooth",
+    "on-click-right": "rfkill toggle bluetooth"
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "󰍛 {percentage}%",
+    "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)"
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 10
+  },
+
+  "battery": {
+    "states": {
+      "health": 80,
+      "warning": 30,
+      "critical": 15
     },
-    "network": {
-      "interface": "wlan0", // Check your interface with `ip link`
-      "format-wifi": " ",
-      "format-ethernet": "󰈀 {ipaddr}",
-      "format-disconnected": "󰖪",
-      "tooltip-format": "Connected to {essid}",
-      "on-click": "~/.config/hypr/scripts/launch-wifi",
-      "max-length": 50
-    },
-    "bluetooth": {
-     "format": " {status}",
-     "format-disabled": "󰂲 Off",
-     "format-connected": " {device_alias}",
-     "tooltip-format": "{controller_alias}\t{controller_address}",
-     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
-     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-     // Left Click: Launch the TUI pop-up
-     "on-click": "~/.config/hypr/scripts/launch-bluetooth",
-     // Middle Click: Hardware Toggle (On/Off)
-     "on-click-right": "rfkill toggle bluetooth",
-    },
-    "tray": {
-    	"icon-size": 14,
-    	"spacing": 10
-     },
-     "custom/asus_profile": {
-        "exec": "asusctl profile -g | grep 'Active profile' | cut -d' ' -f3",
-        "interval": 10,
-        "on-click": "asusctl profile -n",
-        "format": "󰈐 {}"
-    },
-    "custom/logo": {
-      "format": "", // Use  if you prefer the Nix icon
-      "tooltip": false,
-      "on-click": "wlogout" // This makes the logo open your app launcher!
-    },
-    "custom/tailscale": {
-      "format": "{}",
-      "return-type": "json",
-      "interval": 10,
-      "exec": "~/.config/hypr/scripts/tailscale.sh",
-      "on-click": "kdesu /usr/bin/tailscale up",
-      "on-click-right": "kdesu /usr/bin/tailscale down",
-      // "on-click": "pkexec tailscale up",
-      // "on-click-right": "pkexec tailscale down",
-      "tooltip": true
-    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󱐋 {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-health": "󰥔 {capacity}%",
+    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format": "{timeTo}\nPower draw: {power}W"
+  },
+
+  "custom/asus_profile": {
+    "exec": "asusctl profile -g | grep 'Active profile' | cut -d' ' -f3",
+    "interval": 10,
+    "on-click": "asusctl profile -n",
+    "format": "󰈐 {}"
+  },
+
+  "custom/tailscale": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 10,
+    "exec": "~/.config/hypr/scripts/tailscale.sh",
+    "on-click": "kdesu /usr/bin/tailscale up",
+    "on-click-right": "kdesu /usr/bin/tailscale down",
+    "tooltip": true
+  },
+
+  "custom/power": {
+    "format": "⏻",
+    "on-click": "wlogout",
+    "tooltip": false
+  }
 }
