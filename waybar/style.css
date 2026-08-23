@@ -53,12 +53,12 @@ window#waybar {
 }
 
 #custom-mysvg {
-    background-image: url('/home/gip/.config/waybar/Mafty-new.svg');
-    background-position: center center;
+    background-image: url('/home/gip/.config/waybar/Mafty-new-new.svg');
+    background-position: center top; /* Align to upper portion of emblem */
     background-repeat: no-repeat;
     background-size: contain;
-    min-width: 14px;
-    margin: 3px 2px; /* Adds breathing room so top/bottom edges don't stretch */
+    min-width: 18px;
+    margin: 1px 2px;
     padding: 0 2px;
 }
 

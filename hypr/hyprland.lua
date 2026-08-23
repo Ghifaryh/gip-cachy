@@ -104,6 +104,9 @@ hl.env("QT_SCALE_FACTOR", "1")
 -- Browser Wayland support
 hl.env("MOZ_ENABLE_WAYLAND", "1")
 
+-- trying new scaling settings
+hl.env("ELECTRON_OZONE_PLATFORM_HINT", "auto")
+
 hl.config({
 	xwayland = {
 		force_zero_scaling = true,
