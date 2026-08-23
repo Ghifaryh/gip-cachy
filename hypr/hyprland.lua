@@ -415,7 +415,17 @@ hl.bind(
 -- bind = $mainMod, F, togglefloating,
 -- # Toggle floating AND immediately resize to 1600x1000 + center on screen
 
--- hl.bind(mainMod .. " + F", hl.dsp.exec_cmd("~/.config/hypr/scripts/toggle_float_center.sh"))
+-- hl.bind(mainMod .. " + F", function()
+-- 	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+-- 	hl.dispatch(hl.dsp.window.resize({ x = 1600, y = 1000, relative = false }))
+-- end)
+hl.bind(mainMod .. " + F", function()
+	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
+	hl.dispatch(hl.dsp.window.resize({ x = 1600, y = 1000, relative = false }))
+	hl.timer(function()
+		hl.dispatch(hl.dsp.exec_raw("exec hyprctl dispatch centerwindow"))
+	end, { timeout = 50, type = "oneshot" })
+end)
 
 hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle" }))
 hl.bind(mainMod .. " + C", hl.dsp.window.center())
@@ -875,6 +885,14 @@ hl.window_rule({
 		title = "^(Settings|Participants|Chat|Meeting Information|Breakout Rooms|Select a window)$",
 	},
 	float = true,
+	center = true,
+})
+
+hl.window_rule({
+	name = "termius-float",
+	match = { class = "^(Termius|termius-app)$" },
+	float = true,
+	size = { 1200, 800 },
 	center = true,
 })
 

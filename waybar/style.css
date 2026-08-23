@@ -47,9 +47,19 @@ window#waybar {
 /* --- Logo Styling --- */
 #custom-logo {
     font-size: 13px;
-    color: #89b4fa;
+    color: #ebbb01;
     padding-right: 4px;
     padding-left: 2px;
+}
+
+#custom-mysvg {
+    background-image: url('/home/gip/.config/waybar/Mafty-new.svg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    min-width: 14px;
+    margin: 3px 2px; /* Adds breathing room so top/bottom edges don't stretch */
+    padding: 0 2px;
 }
 
 /* --- Workspaces (Equalized Button Height) --- */

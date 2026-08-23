@@ -9,7 +9,8 @@
   "spacing": 4,
 
   "modules-left": [
-    "custom/logo",
+    "custom/mysvg",
+    // "custom/logo",
     "hyprland/workspaces"
   ],
   "modules-center": [
@@ -30,6 +31,12 @@
     "format": "",
     "tooltip": false,
     "on-click": "wlogout"
+  },
+
+  "custom/mysvg": {
+    "format": "  ",
+    "on-click": "wlogout",
+    "tooltip": false
   },
 
   "hyprland/workspaces": {
