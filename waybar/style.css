@@ -13,19 +13,19 @@ window#waybar {
     background: transparent;
 }
 
-/* --- Container Islands (Single Background Layer) --- */
+/* --- Container Islands (Identical Height & Floating Alignment) --- */
 .modules-left,
 .modules-center,
 .modules-right {
-    background: rgba(24, 24, 37, 0.75); /* Dark Catppuccin Mocha base */
-    border: 1px solid rgba(255, 255, 255, 0.12); /* Crisp, subtle glass outline */
-    border-radius: 10px;
-    padding: 0px 10px;
+    background: rgba(15, 15, 20, 0.82);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 9px;
+    padding: 2px 6px;
     margin-top: 0px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* --- Inner Modules (Transparent - Eliminates Double Background) --- */
+/* --- Universal Inner Module Alignment --- */
 #workspaces, 
 #battery, 
 #clock, 
@@ -37,57 +37,79 @@ window#waybar {
 #bluetooth,
 #custom-tailscale,
 #custom-notification {
-    background: transparent; /* Stripped double background */
+    background: transparent;
     border: none;
-    padding: 0 6px;
+    padding: 0 5px;
     color: #cdd6f4;
+    margin: 1px 0; /* Ensures all inner modules share exact vertical space */
 }
 
 /* --- Logo Styling --- */
 #custom-logo {
-    font-size: 15px;
-    color: #89b4fa; /* Accent blue */
-    padding-right: 8px;
-    padding-left: 4px;
+    font-size: 13px;
+    color: #89b4fa;
+    padding-right: 4px;
+    padding-left: 2px;
 }
 
-#custom-notification {
-    font-size: 14px;
-    color: #f38ba8; /* Catppuccin Red accent for notification bell */
+/* --- Workspaces (Equalized Button Height) --- */
+#workspaces {
+    background: transparent;
+    padding: 0;
+    margin: 0;
 }
 
-/* --- Workspaces --- */
 #workspaces button {
-    padding: 0 6px;
-    color: #6c7086; /* Dim inactive workspaces */
+    padding: 0px 6px; /* Zero vertical padding on workspace buttons */
+    margin: 1px 1px;
+    min-width: 16px;
+    color: #6c7086;
+    background: transparent;
+    border-radius: 6px;
+    box-shadow: none;
+    text-shadow: none;
     transition: all 0.2s ease-in-out;
 }
 
 #workspaces button.active {
-    color: #89b4fa; /* Soft Catppuccin Blue */
-    background: rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.16);
+    border-radius: 6px;
 }
 
 #workspaces button:hover {
-    color: #f5e0dc;
-    background: rgba(255, 255, 255, 0.15);
-    border-radius: 8px;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
 }
 
 /* --- Center Clock --- */
 #clock {
     font-weight: bold;
     color: #cdd6f4;
-    padding: 0 4px;
+    padding: 0 5px;
 }
 
-/* --- Right Side Modules & Accents --- */
-#network { color: #89b4fa; }
-#bluetooth { color: #b4befe; }
-#memory { color: #cba6f7; }
+/* --- Right Side Modules --- */
+#network { 
+    color: #89dceb;
+    padding: 0 5px;
+}
 
-#battery { color: #a6e3a1; }
+#bluetooth { 
+    color: #b4befe;
+    padding: 0 5px;
+}
+
+#memory { 
+    color: #cba6f7;
+    padding: 0 5px;
+}
+
+#battery { 
+    color: #a6e3a1; 
+    padding: 0 5px;
+}
 #battery.charging { color: #a6e3a1; }
 #battery.warning { color: #fab387; }
 #battery.critical:not(.charging) {
@@ -97,6 +119,12 @@ window#waybar {
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-direction: alternate;
+}
+
+#custom-notification {
+    font-size: 13px;
+    color: #f38ba8;
+    padding: 0 5px;
 }
 
 @keyframes blink {
@@ -109,13 +137,13 @@ window#waybar {
 
 /* --- System Tray --- */
 #tray {
-    padding: 0 6px;
+    padding: 0 5px;
 }
 
 /* --- Tooltips --- */
 tooltip {
-    background: rgba(30, 30, 46, 0.95);
-    border: 1px solid rgba(203, 166, 247, 0.4);
-    border-radius: 8px;
+    background: rgba(15, 15, 20, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 6px;
     color: #cdd6f4;
 }

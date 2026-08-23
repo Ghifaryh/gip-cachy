@@ -1,8 +1,8 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 24,
-  "margin-top": 0,
+  "height": 20,
+  "margin-top": 2,
   "margin-left": 4,
   "margin-right": 4,
   "margin-bottom": 0,
@@ -34,7 +34,7 @@
 
   "hyprland/workspaces": {
     "format": "{name}",
-    "on-click": "activate",
+    // "on-click": "activate",
     "sort-by-number": true,
     "all-outputs": true
   },
@@ -68,8 +68,6 @@
     },
     "actions": {
       "on-click-right": "mode",
-      "on-scroll-up": "shift_up",
-      "on-scroll-down": "shift_down"
     }
   },
 
