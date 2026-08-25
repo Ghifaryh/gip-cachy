@@ -664,7 +664,7 @@ hl.window_rule({
 	animation = "none",
 	-- Your preferred dimensions
 	size = "530 300",
-	move = "1380 830",
+	move = "1380 885",
 })
 
 hl.window_rule({
