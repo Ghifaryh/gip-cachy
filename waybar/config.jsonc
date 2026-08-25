@@ -17,7 +17,8 @@
     "custom/notification"
   ],
   "modules-right": [
-    "group/media",
+    "mpris",
+    // "group/media",
     "group/stats"
   ],
 
@@ -129,6 +130,7 @@
 "mpris": {
     "format": "{player_icon} {title}",
     "format-paused": "{status_icon} <i>{title}</i>",
+    "hide-empty-text": true,
     "player-icons": {
       "default": "󰎈",
       "spotify": "󰓇",
