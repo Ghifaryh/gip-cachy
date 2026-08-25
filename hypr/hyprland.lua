@@ -689,7 +689,7 @@ hl.window_rule({
 	name = "spotify-browser-pip",
 	match = {
 		class = "^brave-browser-nightly$",
-		title = ".*•.*",
+		title = ".* • .*",
 	},
 	-- Effects
 	float = true,
