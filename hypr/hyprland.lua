@@ -398,7 +398,14 @@ hl.bind(
 		"cliphist list | rofi -dmenu -theme ~/.config/rofi/launchers/type-6/style-1.rasi | cliphist decode | wl-copy && wtype -M ctrl v"
 	)
 )
-hl.bind("SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
+
+-- hl.bind("SHIFT + Print", hl.dsp.exec_cmd("hyprshot -m region --clipboard-only"))
+hl.bind(
+	"SHIFT + Print",
+	hl.dsp.exec_cmd(
+		"AREA=$(slurp) && grim -g \"$AREA\" - | wl-copy && notify-send 'Screenshot' 'Region copied to clipboard'"
+	)
+)
 
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 

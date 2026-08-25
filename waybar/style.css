@@ -38,12 +38,12 @@ window#waybar {
 
 /* --- Specific Pill Spacing --- */
 #media {
-    margin-right: 6px;
+    margin-right: 3px;
     padding: 2px 10px;
 }
 
 #stats {
-    margin-left: 6px;
+    margin-left: 3px;
     padding: 2px 10px;
 }
 
