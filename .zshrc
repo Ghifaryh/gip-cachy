@@ -214,6 +214,9 @@ alias ts='tailscale status'
 alias tsup='sudo systemctl start tailscaled && sudo tailscale up'
 alias tsdown='sudo tailscale down && sudo systemctl stop tailscaled'
 
+# active window
+alias windowcheck="hyprctl clients -j | jq '.[] | {title, class, initialTitle, initialClass, pid}'"
+
 # bun completions
 [ -s "/home/gip/.bun/_bun" ] && source "/home/gip/.bun/_bun"
 

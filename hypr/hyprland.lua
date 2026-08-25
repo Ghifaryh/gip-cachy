@@ -653,7 +653,7 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "brave-pip",
+	name = "brave-youtube-pip",
 	match = {
 		title = "^Picture in picture$",
 	},
@@ -683,6 +683,21 @@ hl.window_rule({
 	-- opacity = 0.8 0.8
 	-- Set size (important for popups)
 	size = "480 700",
+})
+
+hl.window_rule({
+	name = "spotify-browser-pip",
+	match = {
+		class = "^brave-browser-nightly$",
+		title = ".*•.*",
+	},
+	-- Effects
+	float = true,
+	pin = true,
+	animation = "none",
+	-- Dimensions & positioning
+	size = "340 340",
+	move = "1570 850",
 })
 
 hl.window_rule({

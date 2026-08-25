@@ -126,8 +126,8 @@
     "tooltip-format": "{timeTo}\nPower draw: {power}W"
   },
   
-  "mpris": {
-    "format": "{player_icon} {title} - {artist}",
+"mpris": {
+    "format": "{player_icon} {title}",
     "format-paused": "{status_icon} <i>{title}</i>",
     "player-icons": {
       "default": "󰎈",
@@ -139,7 +139,11 @@
       "paused": "󰏤"
     },
     "max-length": 25,
-    "interval": 1
+    "interval": 1,
+    "ellipsis": "…",
+    "tooltip-format": "{player}: {title} - {artist} ({album})",
+    "tooltip-format-firefox": "YouTube/Web: {title} - {artist}",
+    "tooltip-format-brave": "YouTube/Web: {title} - {artist}"
   },
 
   "custom/notification": {
