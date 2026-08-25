@@ -10,22 +10,34 @@
 
   "modules-left": [
     "custom/mysvg",
-    // "custom/logo",
     "hyprland/workspaces"
   ],
   "modules-center": [
-    "clock"
+    "clock",
+    "custom/notification"
   ],
   "modules-right": [
-    // "custom/tailscale",
-    // "custom/asus_profile",
-    "network",
-    "bluetooth",
-    "memory",
-    "tray",
-    "battery",
-    "custom/notification",
+    "group/media",
+    "group/stats"
   ],
+
+  "group/stats": {
+    "orientation": "horizontal",
+    "modules": [
+      "network",
+      "bluetooth",
+      "memory",
+      "tray",
+      "battery"
+    ]
+  },
+
+  "group/media": {
+    "orientation": "horizontal",
+    "modules": [
+      "mpris"
+    ]
+  },
 
   "custom/logo": {
     "format": "",
@@ -41,20 +53,8 @@
 
   "hyprland/workspaces": {
     "format": "{name}",
-    // "on-click": "activate",
     "sort-by-number": true,
     "all-outputs": true
-  },
-
-  "hyprland/window": {
-    "format": "{title}",
-    "max-length": 50,
-    "rewrite": {
-      "(.*) — Mozilla Firefox": "󰈹 $1",
-      "(.*) - Visual Studio Code": "󰨞 $1",
-      "(.*) - fish": " Terminal"
-    },
-    "separate-outputs": true
   },
 
   "clock": {
@@ -74,12 +74,11 @@
       }
     },
     "actions": {
-      "on-click-right": "mode",
+      "on-click-right": "mode"
     }
   },
 
   "network": {
-    // Dynamic detection: automatic fallbacks between Wi-Fi and Ethernet
     "format-wifi": "  {essid}",
     "format-ethernet": "󰈀 {ipaddr}",
     "format-disconnected": "󰖪 Disconnected",
@@ -126,48 +125,40 @@
     "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
     "tooltip-format": "{timeTo}\nPower draw: {power}W"
   },
-
-  "custom/asus_profile": {
-    "exec": "asusctl profile -g | grep 'Active profile' | cut -d' ' -f3",
-    "interval": 10,
-    "on-click": "asusctl profile -n",
-    "format": "󰈐 {}"
-  },
-
-  "custom/tailscale": {
-    "format": "{}",
-    "return-type": "json",
-    "interval": 10,
-    "exec": "~/.config/hypr/scripts/tailscale.sh",
-    "on-click": "kdesu /usr/bin/tailscale up",
-    "on-click-right": "kdesu /usr/bin/tailscale down",
-    "tooltip": true
-  },
-
-  "custom/power": {
-    "format": "⏻",
-    "on-click": "wlogout",
-    "tooltip": false
+  
+  "mpris": {
+    "format": "{player_icon} {title} - {artist}",
+    "format-paused": "{status_icon} <i>{title}</i>",
+    "player-icons": {
+      "default": "󰎈",
+      "spotify": "󰓇",
+      "firefox": "󰈹",
+      "brave": "󰖟"
+    },
+    "status-icons": {
+      "paused": "󰏤"
+    },
+    "max-length": 25,
+    "interval": 1
   },
 
   "custom/notification": {
     "tooltip": false,
-    "format": "{icon}",
+    "format": "{icon} {text}",
     "format-icons": {
       "notification": "󱅫",
-      "none": "󰂚",
+      "none": "",
       "dnd-notification": "󰂛",
-      "dnd-none": "󰂛",
+      "dnd-none": "",
       "inhibited-notification": "󱅫",
-      "inhibited-none": "󰂚",
+      "inhibited-none": "",
       "dnd-inhibited-notification": "󰂛",
-      "dnd-inhibited-none": "󰂛"
+      "dnd-inhibited-none": ""
     },
     "return-type": "json",
-    "exec": "swaync-client -s | stdbuf -oL jq --unbuffered --compact-output '{text: .count, alt: (if .dnd then \"dnd-\" else \"\" end + if .inhibited then \"inhibited-\" else \"\" end + if .count > 0 then \"notification\" else \"none\" end), tooltip: \"Notifications\", class: [(if .count > 0 then \"has-notifications\" else \"none\" end)]}'",
+    "exec": "swaync-client -s | stdbuf -oL jq --unbuffered --compact-output '{text: (if .count > 0 then (.count|tostring) else \"\" end), alt: (if .dnd then \"dnd-\" else \"\" end + if .inhibited then \"inhibited-\" else \"\" end + if .count > 0 then \"notification\" else \"none\" end), tooltip: \"Notifications\", class: [(if .count > 0 then \"has-notifications\" else \"none\" end)]}'",
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
   }
-
 }
