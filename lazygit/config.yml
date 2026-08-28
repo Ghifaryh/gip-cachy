@@ -1,27 +1,37 @@
 gui:
+  # Enable Nerd Font v3 icons
+  nerdFontsVersion: "3"
+  # Make diff view side-by-side when screen is wide enough
+  sideBySideDiff: true
+  # Hide unneeded help/keybinding footers to maximize view space
+  showBottomLine: false
+  showCommandLog: false
+  # Theme: Mafty Crimson Red & Gold
   theme:
     activeBorderColor:
-      - "#89b4fa" # Blue
+      - "#f9e2af" # Mafty Gold for active panel border
       - "bold"
     inactiveBorderColor:
-      - "#a6adc8" # Subtext 0
+      - "#585b70" # Subtle grey for inactive borders
     optionsTextColor:
-      - "#89b4fa" # Blue
+      - "#f38ba8" # Crimson Red for options/keybindings
     selectedLineBgColor:
-      - "#313244" # Surface 0
+      - "#313244" # Surface background highlight
     selectedRangeBgColor:
-      - "#313244" # Surface 0
+      - "#45475a"
     cherryPickedCommitBgColor:
-      - "#94e2d5" # Teal
+      - "#f38ba8"
     cherryPickedCommitFgColor:
-      - "#89b4fa" # Blue
-    unstagedChangesColor:
-      - "#f38ba8" # Red
+      - "#11111b"
     defaultFgColor:
-      - "#cdd6f4" # Text
+      - "#cdd6f4"
     searchingActiveBorderColor:
-      - "#f9e2af" # Yellow
+      - "#f38ba8"
 git:
   diffRenderers:
     - colorArg: always
-      command: delta --dark --paging=never
+      command: delta --dark --paging=never # Uses delta if installed for rich diffs
+  # Better commit graph format
+  log:
+    showGraph: "always"
+    showWholeGraph: false
