@@ -13,6 +13,7 @@
   "timeout-low": 2,
   "timeout-critical": 0,
   "fit-to-screen": true,
+  "hide-on-action": true,
 
   "widgets": [
     "title",
@@ -32,7 +33,9 @@
     },
     "mpris": {
       "image-size": 60,
-      "image-radius": 8
+      "image-radius": 8,
+      "blur": true,
+      "smart-album-art": true
     }
   }
 }
