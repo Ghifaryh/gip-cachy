@@ -1,0 +1,17 @@
+#!/bin/bash
+
+STATUS_JSON=$(tailscale status --json 2>/dev/null)
+
+if [ $? -ne 0 ] || [ -z "$STATUS_JSON" ]; then
+  echo '{"text": "󰖂", "alt": "offline", "tooltip": "Tailscale: Offline", "class": "offline"}'
+  exit 0
+fi
+
+EXIT_NODE_ID=$(echo "$STATUS_JSON" | jq -r '.ExitNodeStatus.ID // empty')
+
+if [ -n "$EXIT_NODE_ID" ]; then
+  NODE_NAME=$(echo "$STATUS_JSON" | jq -r '.Peer[] | select(.ID == "'"$EXIT_NODE_ID"'") | .HostName')
+  echo "{\"text\": \"󰖂\", \"alt\": \"exit-node\", \"tooltip\": \"Tailscale Exit Node: $NODE_NAME\", \"class\": \"exit-node\"}"
+else
+  echo '{"text": "󰖂", "alt": "direct", "tooltip": "Tailscale: Connected (Direct)", "class": "direct"}'
+fi

@@ -25,6 +25,7 @@
   "group/stats": {
     "orientation": "horizontal",
     "modules": [
+      "custom/tailscale",
       "network",
       "bluetooth",
       "memory",
@@ -50,6 +51,16 @@
     "format": "  ",
     "on-click": "wlogout",
     "tooltip": false
+  },
+
+  "custom/tailscale": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 3,
+    "exec": "~/.config/hypr/scripts/tailscale-status",
+    "on-click": "sudo tailscale up --exit-node=gip-wrk-aio --exit-node-allow-lan-access --accept-routes && pkill -RTMIN+8 waybar",
+    "on-click-right": "sudo tailscale up --reset && pkill -RTMIN+8 waybar",
+    "signal": 8
   },
 
   "hyprland/workspaces": {
@@ -127,7 +138,7 @@
     "tooltip-format": "{timeTo}\nPower draw: {power}W"
   },
   
-"mpris": {
+  "mpris": {
     "format": "{player_icon} {title}",
     "format-paused": "{status_icon} <i>{title}</i>",
     "hide-empty-text": true,

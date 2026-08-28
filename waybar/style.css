@@ -185,3 +185,19 @@ tooltip {
     box-shadow: none;
 }
 
+/* --- Tailscale Status Icon Alignment --- */
+#custom-tailscale {
+    color: #89b4fa;
+    font-size: 13.5px;      /* Boost font size slightly to match icon weight */
+    padding: 0 4px 0 2px;  /* Fine-tune horizontal spacing */
+    margin-right: 4px;      /* Space out from the network icon */
+}
+
+#custom-tailscale.exit-node {
+    color: #f9e2af;
+    font-weight: bold;
+}
+
+#custom-tailscale.offline {
+    color: #6c7086;
+}

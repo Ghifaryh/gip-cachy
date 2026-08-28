@@ -214,6 +214,9 @@ alias ts='tailscale status'
 alias tsup='sudo systemctl start tailscaled && sudo tailscale up'
 alias tsdown='sudo tailscale down && sudo systemctl stop tailscaled'
 
+alias exitnode-on="sudo tailscale up --exit-node=gip-wrk-aio --exit-node-allow-lan-access --accept-routes"
+alias exitnode-off="sudo tailscale up --reset"
+
 # active window
 alias windowcheck="hyprctl clients -j | jq '.[] | {title, class, initialTitle, initialClass, pid}'"
 

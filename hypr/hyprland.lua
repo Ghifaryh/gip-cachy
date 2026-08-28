@@ -35,6 +35,11 @@ local fileManager = "dolphin"
 hl.on("hyprland.start", function()
 	hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
 	hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
+
+	-- Launch KDE Polkit Agent in background
+	hl.exec_cmd("/usr/lib/polkit-kde-authentication-agent-1 &")
+
+	-- UI, Notifications, and Daemons
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("hypridle")
@@ -63,7 +68,7 @@ hl.env("XDG_SESSION_DESKTOP", "Hyprland")
 hl.env("GDK_BACKEND", "wayland,x11")
 
 -- Force GTK & Qt Dark Theme
-hl.env("QT_QPA_PLATFORM", "wayland xcb")
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
 hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
 
 -- Let Hyprland compositor handle scaling naturally for Qt apps
