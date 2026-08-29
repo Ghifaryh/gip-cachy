@@ -472,6 +472,7 @@ hl.window_rule({
 	pin = true,
 	animation = "none",
 	size = "530 300",
+	-- size = "unset 300",
 	move = "1380 885",
 })
 
@@ -596,6 +597,14 @@ hl.window_rule({
 	size = "1200 800",
 	center = true,
 })
+
+for i = 6, 10 do
+	hl.window_rule({
+		match = { workspace = tostring(i) },
+		opacity = "1.0 1.0", -- [active] [inactive]
+		opaque = true,
+	})
+end
 
 --#######################
 --## WINDOW GROUPS ######
