@@ -13,8 +13,10 @@
     "hyprland/workspaces"
   ],
   "modules-center": [
-    "clock",
+    // "clock",
+    "group/clock",
     "custom/notification"
+
   ],
   "modules-right": [
     "mpris",
@@ -38,6 +40,15 @@
     "orientation": "horizontal",
     "modules": [
       "mpris"
+    ]
+  },
+
+  "group/clock": {
+    "orientation": "horizontal",
+    "modules": [
+      "clock#time",
+      "custom/separator",
+      "clock#date"
     ]
   },
 
@@ -83,6 +94,53 @@
         "weeks": "<span color='#94e2d5'><b>W{}</b></span>",
         "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
         "today": "<span color='#f38ba8'><b><u>{}</u></b></span>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode"
+    }
+  },
+
+  "clock#time": {
+    "format": "{:%H:%M}",
+    "tooltip-format": "<tt><span size='11pt'>{calendar}</span></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<b>{}</b>",
+        "days": "<b>{}</b>",
+        "weeks": "<b>W{}</b>",
+        "weekdays": "<b>{}</b>",
+        "today": "<b><u>{}</u></b>"
+      }
+    },
+    "actions": {
+      "on-click-right": "mode"
+    }
+  },
+
+  "custom/separator": {
+    "format": "|",
+    "tooltip": false
+  },
+
+  "clock#date": {
+    "format": "{:%A %d}",
+    "tooltip-format": "<tt><span size='11pt'>{calendar}</span></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<b>{}</b>",
+        "days": "<b>{}</b>",
+        "weeks": "<b>W{}</b>",
+        "weekdays": "<b>{}</b>",
+        "today": "<b><u>{}</u></b>"
       }
     },
     "actions": {

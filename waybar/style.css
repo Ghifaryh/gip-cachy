@@ -24,7 +24,6 @@ window#waybar {
 
 /* --- Individual Floating Pills --- */
 .modules-left,
-#clock,
 #custom-notification.has-notifications,
 #mpris,
 #stats {
@@ -48,11 +47,16 @@ window#waybar {
     padding: 2px 10px;
 }
 
+/* --- Clock Module (Unified Mafty Gold Border & Crimson Text) --- */
 #clock {
     font-weight: bold;
-    color: #cdd6f4;
-    padding: 2px 8px;
+    color: #f38ba8;     
+    background: rgba(15, 15, 20, 0.82);
+    border: 1px solid rgba(249, 226, 175, 0.3); /* Mafty Gold Border */
+    border-radius: 9px;
+    padding: 2px 10px;
     margin: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 #custom-notification.has-notifications {
@@ -188,9 +192,9 @@ tooltip {
 /* --- Tailscale Status Icon Alignment --- */
 #custom-tailscale {
     color: #89b4fa;
-    font-size: 13.5px;      /* Boost font size slightly to match icon weight */
-    padding: 0 4px 0 2px;  /* Fine-tune horizontal spacing */
-    margin-right: 4px;      /* Space out from the network icon */
+    font-size: 13.5px;
+    padding: 0 4px 0 2px;
+    margin-right: 4px;
 }
 
 #custom-tailscale.exit-node {
@@ -200,4 +204,40 @@ tooltip {
 
 #custom-tailscale.offline {
     color: #6c7086;
+}
+
+/* --- Outer Pill Container --- */
+#group-clock {
+    background: rgba(15, 15, 20, 0.82);
+    border: 1px solid rgba(249, 226, 175, 0.3); /* Mafty Gold Border */
+    border-radius: 9px;
+    padding: 2px 8px;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Inner Text Elements (Completely Flat, No Inner Borders/Pills) --- */
+#clock.time,
+#custom-separator,
+#clock.date {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0 2px;
+    margin: 0;
+}
+
+#clock.time {
+    color: #f38ba8; /* Mafty Crimson Red */
+    font-weight: bold;
+}
+
+#custom-separator {
+    color: #585b70; /* Dim Muted Grey */
+    font-weight: bold;
+}
+
+#clock.date {
+    color: #f9e2af; /* Mafty Gold */
+    font-weight: bold;
 }
