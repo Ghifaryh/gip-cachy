@@ -149,7 +149,8 @@
   },
 
   "network": {
-    "format-wifi": "  {essid}",
+    // "format-wifi": "  {essid}",
+    "format-wifi": " ",
     "format-ethernet": "󰈀 {ipaddr}",
     "format-disconnected": "󰖪 Disconnected",
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
@@ -162,8 +163,10 @@
 
   "bluetooth": {
     "format": " {status}",
-    "format-disabled": "󰂲 Off",
-    "format-connected": " {device_alias}",
+    // "format-disabled": "󰂲 Off",
+    "format-disabled": "󰂲",
+    // "format-connected": " {device_alias}",
+    "format-connected": "",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}\t({device_battery_percentage}%)",
@@ -173,7 +176,11 @@
 
   "memory": {
     "interval": 5,
-    "format": "<span foreground='#cba6f7'>󰍛 {percentage}%</span>  <span foreground='#f5e0dc'>󰾆 {swapPercentage}%</span>",
+    // "format": "<span foreground='#cba6f7'>󰍛 {percentage}%</span> <span foreground=c#f5e0dc'>󰾆 {swapPercentage}%</span>",
+    // "format": "󰘚 {percentage}%<span color='#585b70'> </span>󰓡 {swapPercentage}%",
+    // "format": "<span size='75%' foreground='#cba6f7'>󰘚 {percentage}%</span>\n<span size='75%' foreground='#f5e0dc'>󰓡 {swapPercentage}%</span>",
+
+    "format": "<span size='70%' color='#cba6f7'>󰘚 {percentage}%</span>\n<span size='70%' color='#f5e0dc' rise='2000'>󰓡 {swapPercentage}%</span>",
     "tooltip-format": "RAM: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB ({swapPercentage}%)"
   },
 

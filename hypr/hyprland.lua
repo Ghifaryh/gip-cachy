@@ -44,7 +44,7 @@ hl.on("hyprland.start", function()
 	hl.exec_cmd("waybar")
 	hl.exec_cmd("hypridle")
 	-- hl.exec_cmd("swayosd-server")
-	hl.exec_cmd("swayosd-server --top-margin 0.7")
+	hl.exec_cmd("swayosd-server --top-margin 0.92")
 	hl.exec_cmd("swaync")
 	hl.exec_cmd("swww-daemon || awww-daemon")
 	hl.exec_cmd("sleep 0.5 && (swww restore || awww restore)")
@@ -234,8 +234,9 @@ hl.config({
 		sensitivity = 0,
 		touchpad = {
 			natural_scroll = true,
-			scroll_factor = 0.5,
+			scroll_factor = 0.25,
 			tap_to_click = true,
+			clickfinger_behavior = true,
 		},
 	},
 })
