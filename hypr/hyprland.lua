@@ -25,7 +25,7 @@ hl.monitor({
 --## MY PROGRAMS ###
 --##################
 
-local terminal = "ghostty"
+local terminal = "kitty"
 local fileManager = "dolphin"
 
 --################
