@@ -71,6 +71,7 @@
     "exec": "~/.config/hypr/scripts/tailscale-status",
     "on-click": "sudo tailscale up --exit-node=gip-wrk-aio --exit-node-allow-lan-access --accept-routes && pkill -RTMIN+8 waybar",
     "on-click-right": "sudo tailscale up --reset && pkill -RTMIN+8 waybar",
+
     "signal": 8
   },
 
