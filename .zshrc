@@ -220,6 +220,44 @@ alias exitnode-off="sudo tailscale up --reset"
 # active window
 alias windowcheck="hyprctl clients -j | jq '.[] | {title, class, initialTitle, initialClass, pid}'"
 
+# fix ghostty ssh term 
+fixssh() {
+  local ssh_user ssh_target ssh_port connect_now
+
+  # Prompt for SSH user (defaults to current local user if left blank)
+  read "ssh_user?SSH User [${USER}]: "
+  ssh_user=${ssh_user:-$USER}
+
+  # Prompt for Target Host/IP (required)
+  read "ssh_target?Target Host or IP: "
+  if [[ -z "$ssh_target" ]]; then
+    echo "Error: Target host is required."
+    return 1
+  fi
+
+  # Prompt for Port (defaults to 22 if left blank)
+  read "ssh_port?Port [22]: "
+  ssh_port=${ssh_port:-22}
+
+  # Execute terminfo copy command
+  echo "Exporting terminfo to ${ssh_user}@${ssh_target}:${ssh_port}..."
+  infocmp -x | ssh "${ssh_user}@${ssh_target}" -p "$ssh_port" "tic -x -o ~/.terminfo -"
+
+  # Verify and prompt to connect directly
+  if [[ $? -eq 0 ]]; then
+    echo "Terminfo successfully copied!"
+    
+    # Prompt to connect now (defaults to 'y')
+    read "connect_now?Connect via SSH now? [Y/n]: "
+    connect_now=${connect_now:-y}
+
+    if [[ "$connect_now" =~ ^[Yy]$ ]]; then
+      echo "Connecting to ${ssh_user}@${ssh_target}:${ssh_port}..."
+      exec ssh "${ssh_user}@${ssh_target}" -p "$ssh_port"
+    fi
+  fi
+}
+
 # bun completions
 [ -s "/home/gip/.bun/_bun" ] && source "/home/gip/.bun/_bun"
 

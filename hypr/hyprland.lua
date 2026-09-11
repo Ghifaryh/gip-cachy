@@ -25,7 +25,7 @@ hl.monitor({
 --## MY PROGRAMS ###
 --##################
 
-local terminal = "kitty"
+local terminal = "ghostty"
 local fileManager = "dolphin"
 
 --################
@@ -234,7 +234,7 @@ hl.config({
 		sensitivity = 0,
 		touchpad = {
 			natural_scroll = true,
-			scroll_factor = 0.25,
+			scroll_factor = 0.5,
 			tap_to_click = true,
 			clickfinger_behavior = true,
 		},
