@@ -82,18 +82,19 @@ stack > box.blank {
 
 /* --- MPRIS MEDIA PLAYER --- */
 .widget-mpris {
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+.widget-mpris-player {
   background: @base;
   padding: 10px;
   margin: 8px 8px;
   border-radius: 14px;
   border: 1px solid rgba(249, 226, 175, 0.3);
   color: @text;
-}
-
-.widget-mpris-player {
-  padding: 0;
-  margin: 0;
-  background: transparent;
 }
 
 .widget-mpris-title {

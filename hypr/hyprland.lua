@@ -25,7 +25,7 @@ hl.monitor({
 --## MY PROGRAMS ###
 --##################
 
-local terminal = "kitty"
+local terminal = "ghostty"
 local fileManager = "dolphin"
 
 --################
@@ -278,7 +278,7 @@ hl.bind(
 hl.bind(
 	"SHIFT + Print",
 	hl.dsp.exec_cmd(
-		'bash -c \'AREA=$(slurp) && grim -g "$AREA" - | wl-copy && notify-send "Screenshot" "Region copied to clipboard"\''
+		'bash -c \'AREA=$(slurp) && grim -g "$AREA" - | wl-copy && notify-send -h int:transient:1 "Screenshot" "Region copied to clipboard"\''
 	)
 )
 
@@ -405,7 +405,7 @@ end)
 
 hl.workspace_rule({
 	workspace = "special:scratchpad",
-	on_created_empty = "kitty tmux",
+	on_created_empty = terminal .. " tmux",
 })
 
 for i = 1, 5 do
@@ -521,8 +521,8 @@ hl.window_rule({
 })
 
 hl.window_rule({
-	name = "kitty-opacity",
-	match = { class = "kitty" },
+	name = terminal .. "-opacity",
+	match = { class = terminal },
 	opacity = "0.8 0.8",
 })
 
