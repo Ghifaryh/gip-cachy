@@ -27,7 +27,8 @@
   "group/stats": {
     "orientation": "horizontal",
     "modules": [
-      "custom/tailscale",
+      "custom/vpn",
+      // "custom/tailscale",
       "network",
       "bluetooth",
       "memory",
@@ -250,5 +251,24 @@
     "on-click": "swaync-client -t -sw",
     "on-click-right": "swaync-client -d -sw",
     "escape": true
+  },
+
+  "custom/vpn": {
+    "format": "{}",
+    "return-type": "json",
+    "interval": 3,
+    "exec": "/home/gip/.config/hypr/scripts/vpn-status.sh",
+    "signal": 8,
+    "menu": "on-click",
+    "menu-file": "/home/gip/.config/waybar/vpn_menu.xml",
+    "menu-actions": {
+        "forti_toggle": "/home/gip/.config/hypr/scripts/vpn-forti-toggle.sh",
+        "ts_toggle": "/home/gip/.config/hypr/scripts/vpn-control.sh ts-toggle",
+        "ts_aio": "/home/gip/.config/hypr/scripts/vpn-control.sh ts-aio",
+        "ts_sandbox": "/home/gip/.config/hypr/scripts/vpn-control.sh ts-sandbox",
+        "ts_direct": "/home/gip/.config/hypr/scripts/vpn-control.sh ts-direct",
+        "disconnect_all": "/home/gip/.config/hypr/scripts/vpn-control.sh disconnect-all"
+    }
   }
+
 }

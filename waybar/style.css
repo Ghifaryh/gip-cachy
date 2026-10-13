@@ -217,7 +217,29 @@ tooltip {
     box-shadow: none;
 }
 
-/* --- Tailscale Status Icon Alignment --- */
+/* --- VPN & Tailscale Module Styling --- */
+#custom-vpn {
+    font-size: 11.5px;
+    padding: 0 4px;
+    margin: 0 2px;
+    color: #cdd6f4;
+}
+
+#custom-vpn.forti-active {
+    color: #f38ba8; /* Mafty Crimson */
+    font-weight: bold;
+}
+
+#custom-vpn.exit-node {
+    color: #f9e2af; /* Mafty Gold */
+    font-weight: bold;
+}
+
+#custom-vpn.forti-active.exit-node {
+    color: #fab387; /* Combined warm orange */
+    font-weight: bold;
+}
+
 #custom-tailscale {
     /* color: #89b4fa; */
     color: #f38ba8;
@@ -269,4 +291,33 @@ tooltip {
 #clock.date {
     color: #f9e2af; /* Mafty Gold */
     font-weight: bold;
+}
+
+/* --- GTK Dropdown Menu (Mafty Theme) --- */
+menu {
+    background-color: rgba(15, 15, 20, 0.95);
+    border: 1px solid rgba(249, 226, 175, 0.35); /* Mafty Gold Border */
+    border-radius: 8px;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+}
+
+menuitem {
+    color: #cdd6f4;
+    padding: 5px 12px;
+    margin: 2px 0;
+    border-radius: 5px;
+    font-size: 11.5px;
+    font-weight: 500;
+}
+
+menuitem:hover {
+    background-color: rgba(249, 226, 175, 0.12); /* Subtle Gold Tint */
+    color: #f9e2af;                              /* Mafty Gold Text */
+}
+
+separator {
+    background-color: rgba(249, 226, 175, 0.2);  /* Muted Gold Separator */
+    min-height: 1px;
+    margin: 4px 6px;
 }

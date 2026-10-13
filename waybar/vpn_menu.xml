@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <object class="GtkMenu" id="menu">
+    <!-- FortiVPN Single Toggle -->
+    <child>
+      <object class="GtkMenuItem" id="forti_toggle">
+        <property name="label">󰒄 Toggle FortiVPN (PSSN)</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkSeparatorMenuItem" id="sep1"/>
+    </child>
+
+    <!-- Tailscale Main Toggle -->
+    <child>
+      <object class="GtkMenuItem" id="ts_toggle">
+        <property name="label">󰖂 Toggle Tailscale (On / Off)</property>
+      </object>
+    </child>
+
+    <!-- Tailscale Exit Node Choices -->
+    <child>
+      <object class="GtkMenuItem" id="ts_aio">
+        <property name="label">  󱞩 Exit Node: gip-wrk-aio</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="ts_sandbox">
+        <property name="label">  󱞩 Exit Node: gip-wrk-sandbox</property>
+      </object>
+    </child>
+    <child>
+      <object class="GtkMenuItem" id="ts_direct">
+        <property name="label">  󰅚 Clear Exit Node (Direct)</property>
+      </object>
+    </child>
+
+    <child>
+      <object class="GtkSeparatorMenuItem" id="sep2"/>
+    </child>
+
+    <!-- Disconnect Everything -->
+    <child>
+      <object class="GtkMenuItem" id="disconnect_all">
+        <property name="label">󰅚 Reset / Disconnect All</property>
+      </object>
+    </child>
+  </object>
+</interface>
