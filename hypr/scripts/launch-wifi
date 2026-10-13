@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 CLASS="impala-float"
 
 # 1. Toggle off if already running
@@ -7,37 +7,30 @@ if pgrep -f "kitty --class=$CLASS" >/dev/null; then
   exit 0
 fi
 
-# 2. Launch TUI in background
+# 2. Launch floating impala window
 kitty --class="$CLASS" -e impala &
 
-# 3. Wait for client to exist
-while [ -z "$(hyprctl clients -j | jq -r ".[] | select(.class == \"$CLASS\")")" ]; do
+# 3. Wait until the window is created
+while [ -z "$addr" ]; do
+  addr=$(hyprctl clients -j | jq -r ".[] | select(.class == \"$CLASS\") | .address")
   sleep 0.05
 done
 
-addr=$(hyprctl clients -j | jq -r ".[] | select(.class == \"$CLASS\") | .address")
-hyprctl dispatch focuswindow address:$addr
+# Focus the window
+hyprctl dispatch focuswindow address:"$addr"
 
-# 4. Grace period before boundary loop kicks in
-sleep 0.3
+# Brief grace period to ensure focus is grabbed
+sleep 0.4
 
-# 5. Boundary Check Loop
-while true; do
-  win_data=$(hyprctl clients -j | jq -r ".[] | select(.address == \"$addr\")")
-  if [ -z "$win_data" ]; then break; fi
-
-  x=$(echo "$win_data" | jq '.at[0]')
-  y=$(echo "$win_data" | jq '.at[1]')
-  w=$(echo "$win_data" | jq '.size[0]')
-  h=$(echo "$win_data" | jq '.size[1]')
-
-  cursor=$(hyprctl cursorpos)
-  cx=$(echo "$cursor" | cut -d',' -f1 | tr -d ' ')
-  cy=$(echo "$cursor" | cut -d',' -f2 | tr -d ' ')
-
-  if ((cx < x || cx > (x + w) || cy < y || cy > (y + h))); then
-    hyprctl dispatch closewindow address:$addr
-    break
-  fi
-  sleep 0.2
+# 4. Event-driven close: wait until another window or workspace is focused
+socat -u "UNIX-CONNECT:$XDG_RUNTIME_DIR/hypr/$HYPRLAND_INSTANCE_SIGNATURE/.socket2.sock" - | while read -r line; do
+  case "$line" in
+  activewindowv2*)
+    new_addr="0x${line#*>>}"
+    if [ "$new_addr" != "$addr" ]; then
+      hyprctl dispatch closewindow address:"$addr"
+      break
+    fi
+    ;;
+  esac
 done

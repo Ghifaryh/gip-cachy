@@ -139,7 +139,27 @@ window#waybar {
 }
 
 /* --- Right Side System Stats & Tray --- */
-#network { color: #f9e2af; }
+#network { 
+    color: #f9e2af; /* Mafty Gold (Default) */
+    transition: color 0.2s ease-in-out;
+}
+
+#network.wifi {
+    color: #f9e2af; /* Mafty Gold */
+}
+
+#network.ethernet {
+    color: #a6e3a1; /* Mint Green */
+}
+
+#network.linked {
+    color: #fab387; /* Warning Peach (Connected but no IP) */
+}
+
+#network.disconnected {
+    color: #6c7086; /* Dim Grey when disconnected */
+}
+
 #bluetooth { color: #f38ba8; }
 #bluetooth.connected { color: #f9e2af; }
 #memory { color: #cba6f7; }
