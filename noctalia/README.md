@@ -7,7 +7,7 @@ This was written on Windows and has not been launched. Waybar, SwayNC, SwayOSD, 
 On CachyOS:
 
 ```sh
-sudo pacman -S noctalia inter-font hyprland-plugins gpu-screen-recorder hyprpicker
+sudo pacman -S noctalia inter-font hyprland-plugins hyprpicker
 ```
 
 | Package | Why |
@@ -15,7 +15,6 @@ sudo pacman -S noctalia inter-font hyprland-plugins gpu-screen-recorder hyprpick
 | `noctalia` | The shell. It is in Arch `extra`. |
 | `inter-font` | The bar and shell font. |
 | `hyprland-plugins` | hyprexpo, the 3x3 workspace overview on Super+O. |
-| `gpu-screen-recorder` | The screen recorder plugin. |
 | `hyprpicker` | The color picker plugin. |
 
 Noctalia downloads the official and community plugins itself. Those are not pacman packages.
@@ -63,9 +62,7 @@ If Hyprland reports an error on `hl.plugin.load`, the plugin path is different o
 
 `syaikhu/hypr-cheatsheet` is the local plugin from the Nix repo. Its manifest asks for plugin API 9. Current Noctalia documents support for API levels 3 through 51, so the id is allowed, but these scripts were not run here. If the panel errors, disable `syaikhu/hypr-cheatsheet`.
 
-`oldirtty/color_picker` and `k4n4t4/hypr-submap` are the community ids from the Nix config. If either is missing from the v5 catalog, `noctalia msg plugins list` shows the current names. Remove the missing id from `[plugins].enabled` and from the bar `start` list.
-
-The screen recorder widget stays on the bar and needs `gpu-screen-recorder`.
+`oldirtty/color_picker` and `k4n4t4/hypr-submap` are the community ids from the Nix config. If either is missing from the v5 catalog, `noctalia msg plugins list` shows the current names. Remove the missing id from `[plugins].enabled` and, for the submap widget, from the bar `start` list.
 
 ## Keybinds
 

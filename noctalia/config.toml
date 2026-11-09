@@ -185,7 +185,6 @@ center = ["media"]
 end = [
   "tray",
   "notifications",
-  "noctalia/screen_recorder:recorder",
   "wallpaper",
   "network",
   "bluetooth",
@@ -280,7 +279,6 @@ pinned = ["brave-browser-nightly", "com.mitchellh.ghostty"]
 
 [plugins]
 enabled = [
-  "noctalia/screen_recorder",
   "oldirtty/color_picker",
   "k4n4t4/hypr-submap",
   "syaikhu/hypr-cheatsheet",
@@ -292,14 +290,6 @@ name = "local"
 kind = "path"
 location = "~/.config/noctalia/plugins"
 enabled = true
-
-[plugin_settings."noctalia/screen_recorder"]
-video_source = "focused"
-directory = "~/Videos/Recordings"
-video_qp = 22
-color_range = "full"
-copy_to_clipboard = true
-audio_source = "default_output"
 
 [plugin_settings."oldirtty/color_picker"]
 picker_tool = "hyprpicker"
