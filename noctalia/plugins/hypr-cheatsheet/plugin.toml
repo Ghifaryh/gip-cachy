@@ -1,0 +1,68 @@
+id = "syaikhu/hypr-cheatsheet"
+name = "Hypr Cheatsheet"
+version = "1.0.0"
+plugin_api = 9
+author = "syaikhu"
+dependencies = ["hyprctl"]
+tags = ["bar", "panel", "utility", "system", "hyprland"]
+icon = "keyboard"
+description = "Searchable keybindings for Hyprland."
+
+[[setting]]
+key = "config"
+type = "file"
+label_key = "settings.config.label"
+description_key = "settings.config.description"
+default = "~/.config/hypr/hyprland.lua"
+
+[[setting]]
+key = "config_type"
+type = "select"
+label_key = "settings.config_type.label"
+description_key = "settings.config_type.description"
+default = "lua"
+options = [
+  { value = "lua", label_key = "settings.config_type.options.lua" },
+  { value = "hyprlang", label_key = "settings.config_type.options.hyprlang" },
+]
+
+[[setting]]
+key = "columns"
+type = "int"
+label_key = "settings.columns.label"
+description_key = "settings.columns.description"
+default = 3
+min = 1
+max = 4
+step = 1
+
+[[setting]]
+key = "show_undescribed"
+type = "bool"
+label_key = "settings.show_undescribed.label"
+description_key = "settings.show_undescribed.description"
+default = false
+
+[[service]]
+id = "service"
+entry = "service.luau"
+
+[[panel]]
+id = "cheatsheet"
+entry = "panel.luau"
+width = 1500
+height = 760
+placement = "floating"
+position = "center"
+open_near_click = true
+
+[[widget]]
+id = "keybinds"
+entry = "widget.luau"
+
+  [[widget.setting]]
+  key = "glyph"
+  type = "glyph"
+  label_key = "settings.glyph.label"
+  description_key = "settings.glyph.description"
+  default = "keyboard"

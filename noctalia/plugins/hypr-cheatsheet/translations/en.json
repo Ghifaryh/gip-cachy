@@ -1,0 +1,60 @@
+{
+  "appearance": "Appearance",
+  "back": "Back",
+  "background": "Background",
+  "binding_count": "{count} bindings",
+  "cancel": "Cancel",
+  "choose_color": "Choose color",
+  "clear": "Clear search",
+  "customize_colors": "Key colors",
+  "edit_bindings": "Edit bindings",
+  "edit_description": "Edit description",
+  "finish_editing": "Finish editing",
+  "hidden_count": "{count} hidden",
+  "hide_binding": "Hide binding",
+  "hyprctl_failed": "Hyprland did not return its active keybindings.",
+  "hyprctl_missing": "hyprctl is required for Hyprland keybindings.",
+  "loading": "Reading keybindings...",
+  "missing_config": "The configured keybind file could not be read.",
+  "no_results": "No keybindings match this search.",
+  "other": "Other",
+  "paste": "Paste color",
+  "refresh": "Refresh",
+  "reset": "Reset",
+  "reset_colors": "Reset all colors",
+  "restore_hidden": "Restore hidden bindings",
+  "save": "Save",
+  "search_placeholder": "Search keys, descriptions, and actions",
+  "settings": {
+    "columns": {
+      "description": "Maximum number of balanced columns in the panel.",
+      "label": "Columns"
+    },
+    "config": {
+      "description": "Hyprland configuration file used to identify the active setup.",
+      "label": "Hyprland config"
+    },
+    "config_type": {
+      "description": "Configuration format used by Hyprland.",
+      "label": "Config type",
+      "options": {
+        "hyprlang": "Hyprlang",
+        "lua": "Lua"
+      }
+    },
+    "glyph": {
+      "description": "Icon shown in the bar.",
+      "label": "Glyph"
+    },
+    "show_undescribed": {
+      "description": "Show bindings without descriptions.",
+      "label": "Show undescribed bindings"
+    }
+  },
+  "show_binding": "Show binding",
+  "source_warning": "Some configuration files could not be read.",
+  "text": "Text",
+  "title": "Hypr Cheatsheet",
+  "widget_tooltip": "Open Hypr Cheatsheet",
+  "without_description": "Without Description"
+}

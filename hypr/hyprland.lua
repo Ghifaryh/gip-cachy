@@ -103,27 +103,28 @@ hl.config({
 
 hl.config({
 	general = {
-		gaps_in = 3,
-		gaps_out = { top = 3, right = 4, bottom = 4, left = 4 },
+		gaps_in = 4,
+		gaps_out = 8,
 		border_size = 2,
 		col = {
-			active_border = { colors = { "rgba(f9e2afee)", "rgba(f38ba8ee)" }, angle = 45 },
-			inactive_border = "rgba(181825aa)",
+			active_border = "rgba(ceb9e8ee)",
+			inactive_border = "rgba(91b987aa)",
 		},
-		resize_on_border = false,
+		resize_on_border = true,
 		allow_tearing = false,
 		layout = "dwindle",
 	},
 	decoration = {
-		rounding = 6,
+		rounding = 12,
 		rounding_power = 2,
 		active_opacity = 1.0,
-		inactive_opacity = 0.95,
+		inactive_opacity = 1.0,
+		dim_modal = true,
 		shadow = {
-			enabled = false,
+			enabled = true,
 		},
 		blur = {
-			enabled = false,
+			enabled = true,
 		},
 	},
 })
@@ -140,6 +141,14 @@ hl.layer_rule({
 	animation = "fade",
 })
 
+hl.layer_rule({
+	name = "noctalia-layer-effects",
+	match = { namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$" },
+	blur = true,
+	ignore_alpha = 0.5,
+	no_anim = true,
+})
+
 --###################
 --## ANIMATIONS #####
 --###################
@@ -150,37 +159,45 @@ hl.config({
 	},
 })
 
-hl.curve("snap", { type = "bezier", points = { { 0.1, 1 }, { 0.3, 1 } } })
+hl.curve("smooth", { type = "bezier", points = { { 0.22, 1 }, { 0.36, 1 } } })
 
 hl.animation({
 	leaf = "windows",
 	enabled = true,
-	speed = 2,
-	bezier = "snap",
+	speed = 8,
+	bezier = "smooth",
+	style = "slide",
+})
+
+hl.animation({
+	leaf = "windowsMove",
+	enabled = true,
+	speed = 8,
+	bezier = "smooth",
 	style = "slide",
 })
 
 hl.animation({
 	leaf = "windowsOut",
 	enabled = true,
-	speed = 2,
-	bezier = "snap",
+	speed = 8,
+	bezier = "smooth",
 	style = "popin 80%",
 })
 
 hl.animation({
 	leaf = "workspaces",
 	enabled = true,
-	speed = 3,
-	bezier = "snap",
+	speed = 8,
+	bezier = "smooth",
 	style = "slide",
 })
 
 hl.animation({
 	leaf = "fade",
 	enabled = true,
-	speed = 2,
-	bezier = "snap",
+	speed = 8,
+	bezier = "smooth",
 })
 
 --###########################################
@@ -249,18 +266,75 @@ hl.gesture({
 })
 
 --##################
---## KEYBINDINGS ###
+--## HYPREXPO ######
 --##################
 
 local mainMod = "SUPER"
+local noctalia = "noctalia msg "
+
+-- hyprland-plugins ships this .so. If Hyprland errors on hl.plugin.load,
+-- run `hyprpm enable hyprexpo` and remove the load line.
+hl.plugin.load("/usr/lib/hyprland/plugins/hyprexpo.so")
+
+hl.config({
+	plugin = {
+		hyprexpo = {
+			columns = 3,
+			rows = 3,
+			gaps_in = 8,
+			gaps_out = 4,
+			workspace_method = "center current",
+			tile_rounding_power = 2.0,
+			tile_rounding = 12,
+			tile_rounding_focus = 12,
+			tile_rounding_hover = 12,
+			keynav_enable = 1,
+			number_key_mode = "workspace",
+		},
+	},
+})
+
+hl.define_submap("hyprexpo", function()
+	hl.bind("H", function()
+		hl.plugin.hyprexpo.kb_focus("left")
+	end)
+	hl.bind("J", function()
+		hl.plugin.hyprexpo.kb_focus("down")
+	end)
+	hl.bind("K", function()
+		hl.plugin.hyprexpo.kb_focus("up")
+	end)
+	hl.bind("L", function()
+		hl.plugin.hyprexpo.kb_focus("right")
+	end)
+	hl.bind("return", function()
+		hl.plugin.hyprexpo.kb_confirm()
+	end)
+	hl.bind(mainMod .. " + O", function()
+		hl.plugin.hyprexpo.expo("toggle")
+	end)
+end)
+
+--##################
+--## KEYBINDINGS ###
+--##################
 
 -- --- ESSENTIAL APPS & LAUNCHERS ---
 hl.bind(mainMod .. " + Return", hl.dsp.exec_cmd(terminal))
 hl.bind(mainMod .. " + W", hl.dsp.window.close())
+hl.bind(mainMod .. " + SHIFT + Q", hl.dsp.window.close())
+hl.bind(mainMod .. " + B", hl.dsp.exec_cmd("brave-browser-nightly"))
 hl.bind(mainMod .. " + SHIFT + B", hl.dsp.exec_cmd('xdg-open "https://"'))
-hl.bind(mainMod .. " + O", hl.dsp.exec_cmd("obsidian"))
+hl.bind(mainMod .. " + SHIFT + O", hl.dsp.exec_cmd("obsidian"))
 hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
-hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd("bash -c '$HOME/.config/rofi/launchers/type-6/launcher.sh'"))
+hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(noctalia .. "panel-toggle launcher"))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center"))
+hl.bind(mainMod .. " + COMMA", hl.dsp.exec_cmd(noctalia .. "settings-toggle"))
+hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd(noctalia .. "window-switcher hold"))
+hl.bind(mainMod .. " + SLASH", hl.dsp.exec_cmd(noctalia .. "panel-toggle syaikhu/hypr-cheatsheet:cheatsheet"))
+hl.bind(mainMod .. " + O", function()
+	hl.plugin.hyprexpo.expo("toggle")
+end)
 
 hl.bind(
 	mainMod .. " + PERIOD",
@@ -269,8 +343,10 @@ hl.bind(
 	)
 )
 
+hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + V", hl.dsp.exec_cmd(noctalia .. "panel-toggle clipboard"))
 hl.bind(
-	mainMod .. " + V",
+	mainMod .. " + ALT + V",
 	hl.dsp.exec_cmd(
 		'bash -c "cliphist list | rofi -dmenu -theme $HOME/.config/rofi/launchers/type-6/style-1.rasi | cliphist decode | wl-copy && wtype -M ctrl v"'
 	)
@@ -283,18 +359,25 @@ hl.bind(
 	)
 )
 
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod .. " + N", hl.dsp.window.cycle_next({ next = true }))
+hl.bind(mainMod .. " + SHIFT + N", hl.dsp.window.cycle_next({ next = false }))
+hl.bind(mainMod .. " + ALT + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
 
 -- --- SESSION & POWER CONTROLS ---
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("loginctl lock-session"))
-hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd("pkill wlogout || wlogout"))
+hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd(noctalia .. "panel-toggle session"))
+hl.bind(mainMod .. " + ALT + ESCAPE", hl.dsp.exec_cmd("pkill wlogout || wlogout"))
 hl.bind(
 	mainMod .. " + M",
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit")
 )
 
 -- --- WINDOW MANAGEMENT & LAYOUTS ---
-hl.bind(mainMod .. " + F", function()
+hl.bind(
+	mainMod .. " + F",
+	hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle", layout_aware = true })
+)
+hl.bind(mainMod .. " + ALT + F", function()
 	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
 	hl.dispatch(hl.dsp.window.resize({ x = 1600, y = 1000, relative = false }))
 	hl.dispatch(hl.dsp.window.center())
@@ -304,20 +387,35 @@ hl.bind(mainMod .. " + SHIFT + F", hl.dsp.window.fullscreen({ mode = "maximized"
 hl.bind(mainMod .. " + C", hl.dsp.window.center())
 
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
-hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))
+hl.bind(mainMod .. " + ALT + J", hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.layout("swapsplit"))
 
--- Move focus (Arrow keys)
+-- Move focus (vim keys, arrows kept)
+hl.bind(mainMod .. " + H", hl.dsp.focus({ direction = "left" }))
+hl.bind(mainMod .. " + J", hl.dsp.focus({ direction = "down" }))
+hl.bind(mainMod .. " + K", hl.dsp.focus({ direction = "up" }))
+hl.bind(mainMod .. " + L", hl.dsp.focus({ direction = "right" }))
+
 hl.bind(mainMod .. " + left", hl.dsp.focus({ direction = "left" }))
 hl.bind(mainMod .. " + right", hl.dsp.focus({ direction = "right" }))
 hl.bind(mainMod .. " + up", hl.dsp.focus({ direction = "up" }))
 hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
+
+hl.bind(mainMod .. " + SHIFT + H", hl.dsp.window.swap({ direction = "l" }))
+hl.bind(mainMod .. " + SHIFT + J", hl.dsp.window.swap({ direction = "d" }))
+hl.bind(mainMod .. " + SHIFT + K", hl.dsp.window.swap({ direction = "u" }))
+hl.bind(mainMod .. " + SHIFT + L", hl.dsp.window.swap({ direction = "r" }))
 
 -- Swap windows (Shift + Arrow keys)
 hl.bind(mainMod .. " + SHIFT + left", hl.dsp.window.swap({ direction = "l" }))
 hl.bind(mainMod .. " + SHIFT + right", hl.dsp.window.swap({ direction = "r" }))
 hl.bind(mainMod .. " + SHIFT + up", hl.dsp.window.swap({ direction = "u" }))
 hl.bind(mainMod .. " + SHIFT + down", hl.dsp.window.swap({ direction = "d" }))
+
+hl.bind(mainMod .. " + CTRL + H", hl.dsp.window.resize({ x = -10, y = 0, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + J", hl.dsp.window.resize({ x = 0, y = 10, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + K", hl.dsp.window.resize({ x = 0, y = -10, relative = true }), { repeating = true })
+hl.bind(mainMod .. " + CTRL + L", hl.dsp.window.resize({ x = 10, y = 0, relative = true }), { repeating = true })
 
 -- Window Resizing
 hl.bind(mainMod .. " + EQUAL", hl.dsp.window.resize({ x = 40, y = 40, relative = true }), { repeating = true })
@@ -332,16 +430,18 @@ for i = 1, 10 do
 	hl.bind(mainMod .. " + SHIFT + " .. ws, hl.dsp.window.move({ workspace = i }))
 end
 
--- General Scratchpad
-hl.bind(mainMod .. " + S", hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+-- General Scratchpad (moved off Super+S, which opens the control center)
+hl.bind(mainMod .. " + ALT + S", hl.dsp.workspace.toggle_special("magic"))
+hl.bind(mainMod .. " + ALT + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
 
 -- Tmux Scratchpad Keybinds
 hl.bind(mainMod .. " + T", hl.dsp.workspace.toggle_special("scratchpad"))
 hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.move({ workspace = "special:scratchpad" }))
 
 -- --- HARDWARE & SYSTEM SCRIPTS ---
-hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/wbrestart.sh"))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload config-only"))
+hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
+hl.bind(mainMod .. " + ALT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/wbrestart.sh"))
 hl.bind(mainMod .. " + F11", hl.dsp.exec_cmd("~/.config/hypr/scripts/hz_cycle.sh"))
 hl.bind(
 	mainMod .. " + F12",
@@ -350,37 +450,13 @@ hl.bind(
 	)
 )
 
--- Media / Brightness / Volume (SwayOSD & Playerctl)
-hl.bind(
-	"XF86AudioRaiseVolume",
-	hl.dsp.exec_cmd("swayosd-client --output-volume raise"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioLowerVolume",
-	hl.dsp.exec_cmd("swayosd-client --output-volume lower"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMute",
-	hl.dsp.exec_cmd("swayosd-client --output-volume mute-toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86AudioMicMute",
-	hl.dsp.exec_cmd("swayosd-client --input-volume mute-toggle"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86MonBrightnessUp",
-	hl.dsp.exec_cmd("swayosd-client --brightness raise"),
-	{ locked = true, repeating = true }
-)
-hl.bind(
-	"XF86MonBrightnessDown",
-	hl.dsp.exec_cmd("swayosd-client --brightness lower"),
-	{ locked = true, repeating = true }
-)
+-- Media / Brightness / Volume (Noctalia OSD)
+hl.bind("XF86AudioRaiseVolume", hl.dsp.exec_cmd(noctalia .. "volume-up"), { locked = true, repeating = true })
+hl.bind("XF86AudioLowerVolume", hl.dsp.exec_cmd(noctalia .. "volume-down"), { locked = true, repeating = true })
+hl.bind("XF86AudioMute", hl.dsp.exec_cmd(noctalia .. "volume-mute"), { locked = true })
+hl.bind("XF86AudioMicMute", hl.dsp.exec_cmd(noctalia .. "mic-mute"), { locked = true })
+hl.bind("XF86MonBrightnessUp", hl.dsp.exec_cmd(noctalia .. "brightness-up"), { locked = true, repeating = true })
+hl.bind("XF86MonBrightnessDown", hl.dsp.exec_cmd(noctalia .. "brightness-down"), { locked = true, repeating = true })
 
 hl.bind("XF86AudioNext", hl.dsp.exec_cmd("playerctl next"), { locked = true })
 hl.bind("XF86AudioPause", hl.dsp.exec_cmd("playerctl play-pause"), { locked = true })
@@ -614,19 +690,20 @@ end
 
 hl.config({
 	group = {
+		auto_group = true,
 		col = {
-			border_active = "rgba(f9e2afee)",
-			border_inactive = "rgba(181825aa)",
+			border_active = "rgba(ceb9e8ee)",
+			border_inactive = "rgba(91b987aa)",
 		},
 		groupbar = {
 			enabled = true,
 			font_size = 10,
 			gradients = false,
 			col = {
-				active = "rgba(f9e2afee)",
-				inactive = "rgba(181825aa)",
+				active = "rgba(ceb9e8ee)",
+				inactive = "rgba(91b987aa)",
 			},
-			text_color = "rgba(cdd6f4ff)",
+			text_color = "rgba(dce4efff)",
 		},
 	},
 })
