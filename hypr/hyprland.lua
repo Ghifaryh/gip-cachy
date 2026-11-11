@@ -42,13 +42,14 @@ hl.on("hyprland.start", function()
 
 	-- UI, Notifications, and Daemons
 	hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'")
-	hl.exec_cmd("waybar")
+	-- hl.exec_cmd("waybar")
 	hl.exec_cmd("hypridle")
 	-- hl.exec_cmd("swayosd-server")
-	hl.exec_cmd("swayosd-server --top-margin 0.92")
-	hl.exec_cmd("swaync")
-	hl.exec_cmd("swww-daemon || awww-daemon")
-	hl.exec_cmd("sleep 0.5 && (swww restore || awww restore)")
+	-- hl.exec_cmd("swayosd-server --top-margin 0.92")
+	-- hl.exec_cmd("swaync")
+	hl.exec_cmd("noctalia")
+	-- hl.exec_cmd("swww-daemon || awww-daemon")
+	-- hl.exec_cmd("sleep 0.5 && (swww restore || awww restore)")
 	hl.exec_cmd("wl-paste --type text --watch cliphist -max-items 500 store")
 	hl.exec_cmd("wl-paste --type image --watch cliphist -max-items 100 store")
 	-- hl.exec_cmd("easyeffects --gapplication-service")
@@ -104,7 +105,7 @@ hl.config({
 hl.config({
 	general = {
 		gaps_in = 4,
-		gaps_out = 8,
+		gaps_out = { top = 3, right = 4, bottom = 4, left = 4 },
 		border_size = 2,
 		col = {
 			active_border = "rgba(ceb9e8ee)",
@@ -121,10 +122,10 @@ hl.config({
 		inactive_opacity = 1.0,
 		dim_modal = true,
 		shadow = {
-			enabled = true,
+			enabled = false,
 		},
 		blur = {
-			enabled = true,
+			enabled = false,
 		},
 	},
 })
@@ -159,45 +160,38 @@ hl.config({
 	},
 })
 
-hl.curve("smooth", { type = "bezier", points = { { 0.22, 1 }, { 0.36, 1 } } })
+-- hl.curve("smooth", { type = "bezier", points = { { 0.22, 1 }, { 0.36, 1 } } })
+hl.curve("snap", { type = "bezier", points = { { 0.1, 1 }, { 0.3, 1 } } })
 
 hl.animation({
 	leaf = "windows",
 	enabled = true,
-	speed = 8,
-	bezier = "smooth",
-	style = "slide",
-})
-
-hl.animation({
-	leaf = "windowsMove",
-	enabled = true,
-	speed = 8,
-	bezier = "smooth",
+	speed = 2,
+	bezier = "snap",
 	style = "slide",
 })
 
 hl.animation({
 	leaf = "windowsOut",
 	enabled = true,
-	speed = 8,
-	bezier = "smooth",
+	speed = 2,
+	bezier = "snap",
 	style = "popin 80%",
 })
 
 hl.animation({
 	leaf = "workspaces",
 	enabled = true,
-	speed = 8,
-	bezier = "smooth",
+	speed = 3,
+	bezier = "snap",
 	style = "slide",
 })
 
 hl.animation({
 	leaf = "fade",
 	enabled = true,
-	speed = 8,
-	bezier = "smooth",
+	speed = 2,
+	bezier = "snap",
 })
 
 --###########################################
@@ -274,46 +268,46 @@ local noctalia = "noctalia msg "
 
 -- hyprland-plugins ships this .so. If Hyprland errors on hl.plugin.load,
 -- run `hyprpm enable hyprexpo` and remove the load line.
-hl.plugin.load("/usr/lib/hyprland/plugins/hyprexpo.so")
+-- hl.plugin.load("/usr/lib/hyprland/plugins/hyprexpo.so")
 
-hl.config({
-	plugin = {
-		hyprexpo = {
-			columns = 3,
-			rows = 3,
-			gaps_in = 8,
-			gaps_out = 4,
-			workspace_method = "center current",
-			tile_rounding_power = 2.0,
-			tile_rounding = 12,
-			tile_rounding_focus = 12,
-			tile_rounding_hover = 12,
-			keynav_enable = 1,
-			number_key_mode = "workspace",
-		},
-	},
-})
+-- hl.config({
+-- 	plugin = {
+-- 		hyprexpo = {
+-- 			columns = 3,
+-- 			rows = 3,
+-- 			gaps_in = 8,
+-- 			gaps_out = 4,
+-- 			workspace_method = "center current",
+-- 			tile_rounding_power = 2.0,
+-- 			tile_rounding = 12,
+-- 			tile_rounding_focus = 12,
+-- 			tile_rounding_hover = 12,
+-- 			keynav_enable = 1,
+-- 			number_key_mode = "workspace",
+-- 		},
+-- 	},
+-- })
 
-hl.define_submap("hyprexpo", function()
-	hl.bind("H", function()
-		hl.plugin.hyprexpo.kb_focus("left")
-	end)
-	hl.bind("J", function()
-		hl.plugin.hyprexpo.kb_focus("down")
-	end)
-	hl.bind("K", function()
-		hl.plugin.hyprexpo.kb_focus("up")
-	end)
-	hl.bind("L", function()
-		hl.plugin.hyprexpo.kb_focus("right")
-	end)
-	hl.bind("return", function()
-		hl.plugin.hyprexpo.kb_confirm()
-	end)
-	hl.bind(mainMod .. " + O", function()
-		hl.plugin.hyprexpo.expo("toggle")
-	end)
-end)
+-- hl.define_submap("hyprexpo", function()
+-- 	hl.bind("H", function()
+-- 		hl.plugin.hyprexpo.kb_focus("left")
+-- 	end)
+-- 	hl.bind("J", function()
+-- 		hl.plugin.hyprexpo.kb_focus("down")
+-- 	end)
+-- 	hl.bind("K", function()
+-- 		hl.plugin.hyprexpo.kb_focus("up")
+-- 	end)
+-- 	hl.bind("L", function()
+-- 		hl.plugin.hyprexpo.kb_focus("right")
+-- 	end)
+-- 	hl.bind("return", function()
+-- 		hl.plugin.hyprexpo.kb_confirm()
+-- 	end)
+-- 	hl.bind(mainMod .. " + O", function()
+-- 		hl.plugin.hyprexpo.expo("toggle")
+-- 	end)
+-- end)
 
 --##################
 --## KEYBINDINGS ###
@@ -331,10 +325,10 @@ hl.bind(mainMod .. " + SPACE", hl.dsp.exec_cmd(noctalia .. "panel-toggle launche
 hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center"))
 hl.bind(mainMod .. " + COMMA", hl.dsp.exec_cmd(noctalia .. "settings-toggle"))
 hl.bind(mainMod .. " + TAB", hl.dsp.exec_cmd(noctalia .. "window-switcher hold"))
-hl.bind(mainMod .. " + SLASH", hl.dsp.exec_cmd(noctalia .. "panel-toggle syaikhu/hypr-cheatsheet:cheatsheet"))
-hl.bind(mainMod .. " + O", function()
-	hl.plugin.hyprexpo.expo("toggle")
-end)
+-- hl.bind(mainMod .. " + SLASH", hl.dsp.exec_cmd(noctalia .. "panel-toggle syaikhu/hypr-cheatsheet:cheatsheet"))
+-- hl.bind(mainMod .. " + O", function()
+-- 	hl.plugin.hyprexpo.expo("toggle")
+-- end)
 
 hl.bind(
 	mainMod .. " + PERIOD",
@@ -373,10 +367,7 @@ hl.bind(
 )
 
 -- --- WINDOW MANAGEMENT & LAYOUTS ---
-hl.bind(
-	mainMod .. " + F",
-	hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle", layout_aware = true })
-)
+hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen({ mode = "maximized", action = "toggle", layout_aware = true }))
 hl.bind(mainMod .. " + ALT + F", function()
 	hl.dispatch(hl.dsp.window.float({ action = "toggle" }))
 	hl.dispatch(hl.dsp.window.resize({ x = 1600, y = 1000, relative = false }))
