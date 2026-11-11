@@ -47,7 +47,7 @@ hl.on("hyprland.start", function()
 	-- hl.exec_cmd("swayosd-server")
 	-- hl.exec_cmd("swayosd-server --top-margin 0.92")
 	-- hl.exec_cmd("swaync")
-	hl.exec_cmd("noctalia")
+	hl.exec_cmd("sleep 1 && noctalia")
 	-- hl.exec_cmd("swww-daemon || awww-daemon")
 	-- hl.exec_cmd("sleep 0.5 && (swww restore || awww restore)")
 	hl.exec_cmd("wl-paste --type text --watch cliphist -max-items 500 store")
@@ -147,7 +147,7 @@ hl.layer_rule({
 	match = { namespace = "^noctalia-(bar-.+|notification|dock|panel|attached-panel|osd|window-switcher)$" },
 	blur = true,
 	ignore_alpha = 0.5,
-	no_anim = true,
+	-- no_anim = true,
 })
 
 --###################
@@ -355,12 +355,13 @@ hl.bind(
 
 hl.bind(mainMod .. " + N", hl.dsp.window.cycle_next({ next = true }))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.window.cycle_next({ next = false }))
-hl.bind(mainMod .. " + ALT + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
+-- hl.bind(mainMod .. " + ALT + N", hl.dsp.exec_cmd("swaync-client -t -sw"))
+hl.bind(mainMod .. " + ALT + N", hl.dsp.exec_cmd(noctalia .. "panel-toggle control-center"))
 
 -- --- SESSION & POWER CONTROLS ---
 hl.bind(mainMod .. " + SHIFT + L", hl.dsp.exec_cmd("loginctl lock-session"))
 hl.bind(mainMod .. " + ESCAPE", hl.dsp.exec_cmd(noctalia .. "panel-toggle session"))
-hl.bind(mainMod .. " + ALT + ESCAPE", hl.dsp.exec_cmd("pkill wlogout || wlogout"))
+-- hl.bind(mainMod .. " + ALT + ESCAPE", hl.dsp.exec_cmd("pkill wlogout || wlogout"))
 hl.bind(
 	mainMod .. " + M",
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch exit")
@@ -432,7 +433,7 @@ hl.bind(mainMod .. " + SHIFT + T", hl.dsp.window.move({ workspace = "special:scr
 -- --- HARDWARE & SYSTEM SCRIPTS ---
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd("hyprctl reload config-only"))
 hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd("hyprctl reload"))
-hl.bind(mainMod .. " + ALT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/wbrestart.sh"))
+-- hl.bind(mainMod .. " + ALT + R", hl.dsp.exec_cmd("~/.config/hypr/scripts/wbrestart.sh"))
 hl.bind(mainMod .. " + F11", hl.dsp.exec_cmd("~/.config/hypr/scripts/hz_cycle.sh"))
 hl.bind(
 	mainMod .. " + F12",
@@ -471,10 +472,10 @@ end)
 --## WORKSPACE RULES ######
 --#########################
 
-hl.workspace_rule({
-	workspace = "special:scratchpad",
-	on_created_empty = terminal .. " tmux",
-})
+-- hl.workspace_rule({
+-- 	workspace = "special:scratchpad",
+-- 	on_created_empty = terminal .. " tmux",
+-- })
 
 for i = 1, 5 do
 	hl.workspace_rule({
@@ -619,7 +620,8 @@ hl.window_rule({
 
 hl.window_rule({
 	name = "polkit-agent-float",
-	match = { class = "^(polkit-gnome-authentication-agent-1|hyprpolkitagent)$" },
+	-- match = { class = "^(polkit-gnome-authentication-agent-1|hyprpolkitagent)$" },
+	match = { class = "^(polkit-gnome-authentication-agent-1|hyprpolkitagent|polkit-kde-authentication-agent-1)$" },
 	float = true,
 	center = true,
 	pin = true,
