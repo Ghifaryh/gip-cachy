@@ -27,12 +27,12 @@
   "group/stats": {
     "orientation": "horizontal",
     "modules": [
+      "tray",
       "custom/vpn",
       // "custom/tailscale",
       "network",
       "bluetooth",
       "memory",
-      "tray",
       "battery"
     ]
   },
